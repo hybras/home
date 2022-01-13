@@ -1,0 +1,10 @@
+= Caddy Reverse Proxy
+
+Used to map between my subdomains and ports for each service. Also does https (including getting certificates)
+
+Caddy needs env vars $DOMAIN and $EMAIL to run. Set them in `.env`.
+
+== https w/ duckdns
+
+https://github.com/dani-garcia/vaultwarden/wiki/Running-a-private-vaultwarden-instance-with-Let%27s-Encrypt-certs
+https://github.com/caddy-dns/duckdns#challenge-delegation

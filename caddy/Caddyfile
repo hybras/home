@@ -1,0 +1,208 @@
+{$PIHOLE_DOMAIN} {
+	encode gzip zstd
+	reverse_proxy pihole:80
+}
+
+{$REDDIT_DOMAIN} {
+	log {
+		level INFO
+		output file {$LOG_DIR}/reddit.log {
+			roll_size 10MB
+			roll_keep 10
+		}
+	}
+
+	tls {
+		dns duckdns {$DUCKDNS_TOKEN} {
+			override_domain {$DUCKDNS_DOMAIN}
+		}
+	}
+
+	encode gzip
+
+	reverse_proxy libreddit:8080 {
+		header_up X-Real-IP {remote_host}
+	}
+}
+
+{$VAULTWARDEN_DOMAIN} {
+	log {
+		level INFO
+		output file {$LOG_DIR}/vaultwarden.log {
+			roll_size 10MB
+			roll_keep 10
+		}
+	}
+
+	tls {
+		dns duckdns {$DUCKDNS_TOKEN} {
+			override_domain {$DUCKDNS_DOMAIN}
+		}
+	}
+
+	encode gzip
+
+	# Notifications redirected to the WebSocket server
+	reverse_proxy /notifications/hub vaultwarden:3012
+
+	# Proxy everything else to Rocket
+	reverse_proxy vaultwarden:80 {
+		# Send the true remote IP to Rocket, so that vaultwarden can put this in the
+		# log, so that fail2ban can ban the correct IP.
+		header_up X-Real-IP {remote_host}
+	}
+}
+
+{$BIBLIOGRAM_DOMAIN} {
+	log {
+		level INFO
+		output file {$LOG_DIR}/bibliogram.log {
+			roll_size 10MB
+			roll_keep 10
+		}
+	}
+
+	tls {
+		dns duckdns {$DUCKDNS_TOKEN} {
+			override_domain {$DUCKDNS_DOMAIN}
+		}
+	}
+
+	encode gzip
+
+	reverse_proxy bibliogram:80 {
+		header_up X-Real-IP {remote_host}
+	}
+}
+
+{$INVIDIOUS_DOMAIN} {
+	log {
+		level INFO
+		output file {$LOG_DIR}/invidious.log {
+			roll_size 10MB
+			roll_keep 10
+		}
+	}
+
+	tls {
+		dns duckdns {$DUCKDNS_TOKEN} {
+			override_domain {$DUCKDNS_DOMAIN}
+		}
+	}
+
+	encode gzip
+
+	reverse_proxy invidious:80 {
+		header_up X-Real-IP {remote_host}
+	}
+}
+
+{$LINGVA_DOMAIN} {
+	log {
+		level INFO
+		output file {$LOG_DIR}/lingva.log {
+			roll_size 10MB
+			roll_keep 10
+		}
+	}
+
+	tls {
+		dns duckdns {$DUCKDNS_TOKEN} {
+			override_domain {$DUCKDNS_DOMAIN}
+		}
+	}
+
+	encode gzip
+
+	reverse_proxy lingva:80 {
+		header_up X-Real-IP {remote_host}
+	}
+}
+
+{$NITTER_DOMAIN} {
+	log {
+		level INFO
+		output file {$LOG_DIR}/nitter.log {
+			roll_size 10MB
+			roll_keep 10
+		}
+	}
+
+	tls {
+		dns duckdns {$DUCKDNS_TOKEN} {
+			override_domain {$DUCKDNS_DOMAIN}
+		}
+	}
+
+	encode gzip
+
+	reverse_proxy nitter:80 {
+		header_up X-Real-IP {remote_host}
+	}
+}
+
+{$PROXITOK_DOMAIN} {
+	log {
+		level INFO
+		output file {$LOG_DIR}/proxitok.log {
+			roll_size 10MB
+			roll_keep 10
+		}
+	}
+
+	tls {
+		dns duckdns {$DUCKDNS_TOKEN} {
+			override_domain {$DUCKDNS_DOMAIN}
+		}
+	}
+
+	encode gzip
+
+	reverse_proxy proxitok:80 {
+		header_up X-Real-IP {remote_host}
+	}
+}
+
+{$RIMGO_DOMAIN} {
+	log {
+		level INFO
+		output file {$LOG_DIR}/rimgo.log {
+			roll_size 10MB
+			roll_keep 10
+		}
+	}
+
+	tls {
+		dns duckdns {$DUCKDNS_TOKEN} {
+			override_domain {$DUCKDNS_DOMAIN}
+		}
+	}
+
+	encode gzip
+
+	reverse_proxy rimgo:80 {
+		header_up X-Real-IP {remote_host}
+	}
+}
+
+{$GITEA_DOMAIN} {
+	log {
+		level INFO
+		output file {$LOG_DIR}/gitea.log {
+			roll_size 10MB
+			roll_keep 10
+		}
+	}
+
+	tls {
+		dns duckdns {$DUCKDNS_TOKEN} {
+			override_domain {$DUCKDNS_DOMAIN}
+		}
+	}
+
+	encode gzip
+
+	reverse_proxy gitea:80 {
+		header_up X-Real-IP {remote_host}
+	}
+}

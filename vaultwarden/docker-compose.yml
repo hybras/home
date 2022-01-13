@@ -1,0 +1,23 @@
+version: '3' # https://github.com/dani-garcia/vaultwarden
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    restart: unless-stopped
+    environment:
+      WEBSOCKET_ENABLED: 'true' # Enable WebSocket notifications.
+      LOG_FILE: '/data/vaultwarden.log'
+      EXTENDED_LOGGING: 'true'
+      LOG_LEVEL: warn
+    volumes:
+      - vaultwarden:/data
+    networks:
+      - vaultwarden
+
+networks:
+  vaultwarden:
+    name: vaultwarden
+
+volumes:
+  vaultwarden:
+    name: vaultwarden

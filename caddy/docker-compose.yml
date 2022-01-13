@@ -1,0 +1,57 @@
+version: '3'
+
+services:
+  caddy:
+    image: caddy:2
+    container_name: caddy
+    restart: always
+    ports:
+      - 80:80 # Needed for the ACME HTTP-01 challenge.
+      - 443:443
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy:/data
+      - ./caddy_linux_arm64_custom_duckdns:/usr/bin/caddy
+    networks:
+      - caddy
+      - vaultwarden
+      - libreddit
+      - bibliogram
+      - invidious
+      - lingva
+      - nitter
+      - proxitok
+      - rimgo
+      - gitea
+    env_file:
+      - ./caddy.env
+      - ./duckdns.env
+    environment:
+      - LOG_DIR=/data
+
+networks:
+  caddy:
+    name: caddy
+  vaultwarden:
+    external: true
+  libreddit:
+    external: true
+  pihole:
+    external: true
+  bibliogram:
+    external: true
+  invidious:
+    external: true
+  lingva:
+    external: true
+  nitter:
+    external: true
+  proxitok:
+    external: true
+  rimgo:
+    external: true
+  gitea:
+    external: true
+volumes:
+  caddy:
+    external: true

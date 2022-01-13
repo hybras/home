@@ -1,0 +1,6 @@
+= Pi-Hole Dns (and Adblock)
+
+https://github.com/pi-hole/docker-pi-hole
+https://docs.pi-hole.net/
+
+I did this : https://github.com/pi-hole/docker-pi-hole#installing-on-ubuntu

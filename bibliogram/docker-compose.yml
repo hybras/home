@@ -1,0 +1,21 @@
+version: '3'
+
+volumes:
+  bibliogram-db:
+    name: bibliogram-db
+
+networks:
+  bibliogram:
+    name: bibliogram
+
+services:
+  bibliogram:
+    image: ghcr.io/xnaas/bibliogram:latest
+    container_name: bibliogram
+    restart: unless-stopped
+    mem_limit: 100MiB
+    volumes:
+      - ./config.js:/config/config.js:ro
+      - bibliogram-db:/app/db
+    networks:
+      - bibliogram
