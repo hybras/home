@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  caddy:
+    image: ghcr.io/hybras/caddy:latest
+    container_name: caddy
+    restart: always
+    ports:
+      - 80:80 # Needed for the ACME HTTP-01 challenge.
+      - 443:443
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy:/data
+    networks:
+      - caddy
+    env_file:
+      - ./caddy.env
+      - ./duckdns.env
+    environment:
+      - LOG_DIR=/data
+    mem_limit: 40MiB
+
+networks:
+  caddy:
+    name: caddy
+volumes:
+  caddy:
+    name: caddy

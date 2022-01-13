@@ -1,0 +1,11 @@
+= Caddy Reverse Proxy
+
+Used to map between my subdomains and ports for each service. Also does https (including getting certificates)
+
+Caddy needs env vars $DOMAIN and $EMAIL to run. Set them in `.env`.
+
+== https w/ duckdns
+
+Build my own image that builds my own caddy with the duckdns plugin
+
+== Add tailscale

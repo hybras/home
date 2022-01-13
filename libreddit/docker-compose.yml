@@ -1,0 +1,22 @@
+version: '3'
+
+networks:
+  libreddit:
+    name: libreddit
+  caddy:
+    external: true
+
+services:
+  libreddit:
+    image: spikecodes/libreddit:arm
+    container_name: libreddit
+    restart: unless-stopped
+    mem_limit: 40MiB
+    networks:
+      - libreddit
+      - caddy
+    healthcheck:
+      test: wget -nv --tries=1 --spider http://127.0.0.1:8080 || exit 1
+      interval: 30s
+      timeout: 5s
+      retries: 2

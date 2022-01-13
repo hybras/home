@@ -1,0 +1,24 @@
+version: '3'
+
+volumes:
+  bibliogram-db:
+    name: bibliogram-db
+
+networks:
+  bibliogram:
+    name: bibliogram
+  caddy:
+    external: true
+
+services:
+  bibliogram:
+    image: ghcr.io/xnaas/bibliogram:latest
+    container_name: bibliogram
+    restart: always
+    mem_limit: 100MiB
+    volumes:
+      - ./config.js:/config/config.js:ro
+      - bibliogram-db:/app/db
+    networks:
+      - bibliogram
+      - caddy

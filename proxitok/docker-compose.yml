@@ -1,0 +1,55 @@
+version: '3'
+
+volumes:
+  proxitok-cache:
+    name: proxitok-cache
+  proxitok-db:
+    name: proxitok-db
+
+networks:
+  proxitok:
+    name: proxitok
+  caddy:
+    external: true
+
+services:
+
+  proxitok:
+    container_name: proxitok
+    image: quay.io/pussthecatorg/proxitok:latest
+    restart: unless-stopped
+    environment:
+      - "LATTE_CACHE=/cache"
+      - "API_CACHE=redis"
+      - "REDIS_HOST=proxitok-db"
+      - "REDIS_PORT=6379"
+      - "API_SIGNER_URL=http://proxitok-signer:8080/signature"
+    volumes:
+      - "proxitok-cache:/cache"
+    networks:
+      - proxitok
+      - caddy
+    mem_limit: 300MiB
+    depends_on:
+      - proxitok-db
+      - proxitok-signer
+
+  proxitok-db:
+    image: redis:alpine
+    container_name: proxitok-db
+    command: redis-server --save 60 1 --loglevel warning
+    restart: unless-stopped
+    mem_limit: 40MiB
+    volumes:
+      - "proxitok-db:/data"
+    networks:
+      - proxitok
+
+  proxitok-signer:
+    container_name: proxitok-signer
+    hostname: proxitok-signer
+    image: ghcr.io/pablouser1/signtok:master
+    restart: unless-stopped
+    mem_limit: 300MiB
+    networks:
+      - proxitok

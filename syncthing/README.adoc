@@ -1,0 +1,4 @@
+
+https://init8.lol/synthing-anywhere-with-tailscale/
+https://console.dev/articles/private-p2p-encrypted-file-sync-syncthing-tailscale/
+https://forum.syncthing.net/t/syncthing-tailscale/15293

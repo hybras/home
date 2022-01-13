@@ -1,0 +1,17 @@
+= Pi-Hole Dns (and Adblock)
+
+https://github.com/pi-hole/docker-pi-hole
+https://docs.pi-hole.net/
+https://docs.pi-hole.net/docker/dhcp/
+https://discourse.pi-hole.net/t/dhcp-with-docker-compose-and-bridge-networking/17038
+https://discourse.pi-hole.net/t/how-do-i-use-pi-holes-built-in-dhcp-server-and-why-would-i-want-to/3026
+https://discourse.pi-hole.net/t/how-do-i-configure-my-devices-to-use-pi-hole-as-their-dns-server/245
+https://github.com/pi-hole/docker-pi-hole/blob/master/docker-compose-nginx-proxy.yml
+https://stackoverflow.com/questions/39493490/provide-static-ip-to-docker-containers-via-docker-compose
+
+https://docs.docker.com/network/
+https://docs.docker.com/network/network-tutorial-standalone/
+https://docs.docker.com/network/network-tutorial-host/
+
+env var VIRTUAL_HOST?
+pi hole addresses?

@@ -1,0 +1,4 @@
+{$PIHOLE_DOMAIN}:80 {
+	encode gzip zstd
+	reverse_proxy pihole:80
+}

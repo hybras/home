@@ -1,0 +1,3 @@
+[submodule "libredirect"]
+	path = redirect
+	url = https://github.com/libredirect/libredirect

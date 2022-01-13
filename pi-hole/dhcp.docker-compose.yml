@@ -1,0 +1,63 @@
+version: "3"
+
+volumes:
+  pihole:
+    name: pihole
+  pihole-dnsmasq:
+    name: pihole-dnsmasq
+
+networks:
+  pihole:
+    name: pihole
+    ipam:
+      config:
+        - subnet: 172.56.0.0/16
+
+# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+
+services:
+  dhcp-helper:
+    image: jauderho/dhcp-helper
+    container_name: dhcp-helper
+    restart: unless-stopped
+    network_mode: host
+    command: -s 172.56.0.100
+    cap_add:
+      - NET_ADMIN
+    mem_limit: 40MiB
+  pihole:
+    image: pihole/pihole:latest
+    container_name: pihole
+    hostname: pihole
+    labels:
+      - com.centurylinklabs.watchtower.enable=false
+    mem_limit: 40MiB
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+    environment:
+      VIRTUAL_HOST: 'dns.hybras.dev'
+      ServerIP: 192.168.1.210
+      DNSMASQ_LISTENING: all
+      DHCP_ACTIVE: 'true'
+      DHCP_ROUTER: 192.168.1.1
+      DHCP_START: 192.168.1.2
+      DHCP_END: 192.168.1.254
+      TZ: 'America/New_York'
+      PIHOLE_DNS_: '208.67.220.220;1.1.1.1;8.8.8.8'
+    env_file:
+      - webpassword.env
+    volumes:
+      - 'pihole:/etc/pihole/'
+      - 'pihole-dnsmasq:/etc/dnsmasq.d/'
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+    networks:
+      pihole:
+        ipv4_address: '172.56.0.100'
+    depends_on:
+      - dhcp-helper
+    dns:
+      - 127.0.0.1
+      - 1.1.1.1

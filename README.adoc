@@ -1,0 +1,90 @@
+= Home Setup
+
+This repository is a rough spec of what my home server runs. I'm using watchtower for automatic upgrades, which means upgrades which require manual intervention are not allowed.
+
+== TODO
+
+* Bitwarden
+* Nextcloud
+* Use `service.deploy.resources.limits.memory` instead of `service.mem_limit`
+* pi hole
+* more apps from linuxserver.io
+** calibre
+** freshrss
+** Media
+*** (Owntone / daapd)
+*** jellyfin
+** Beets
+** Heimdall
+** duckdns
+** Duplicati
+** libreoffice
+** paperless
+
+
+== Services
+
+|===
+| Service | Replacement | Status | Comment
+
+| Reddit
+| LibReddit
+| https://reddit.hybras.dev[✅]
+|
+
+| Instagram
+| Bibliogram
+| https://insta.hybras.dev[✅]
+|
+
+| Twitter
+| Nitter
+| https://twitter.hybras.dev[✅]
+|
+
+| Youtube
+| Invidious
+| https://youtube.hybras.dev[✅]
+|
+
+| Imgur
+| Rimgo
+| https://imgur.hybras.dev[✅]
+|
+
+| Google
+| Whoogle
+| ❌
+| Duckduck go is fine
+
+| Tiktok
+| Proxitok
+| https://tiktok.hybras.dev[✅]
+|
+
+| Translate
+| Lingva
+| https://translate.hybras.dev[✅]
+|
+
+| Music
+| Beatbump
+| ❌
+| Needs cloud cdn / caching for prod
+
+| Google Cloud Sync
+| Nextcloud
+| ❌
+| Massive undertaking
+
+| Bitwarden
+| Vaultwarden
+| https://vault.hybras.dev[✅]
+| Need to migrate account
+
+| Github
+| Gitea
+| https://git.hybras.dev[✅]
+| Need to migrate my repo's
+
+|===

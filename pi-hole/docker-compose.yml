@@ -1,0 +1,45 @@
+version: '3'
+
+volumes:
+  pihole:
+    name: pihole
+  pihole-dnsmasq:
+    name: pihole-dnsmasq
+
+networks:
+  pihole:
+    name: pihole
+  caddy:
+    external: true
+
+# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+
+services:
+  pihole:
+    container_name: pihole
+    hostname: pihole
+    labels:
+      - com.centurylinklabs.watchtower.enable=false
+    image: pihole/pihole:latest
+    ports:
+      - '53:53/tcp'
+      - '53:53/udp'
+    environment:
+      VIRTUAL_HOST: 'dns.hybras.dev'
+      ServerIP: 192.168.1.211
+      TZ: 'America/New_York'
+      PIHOLE_DNS_: '208.67.220.220;1.1.1.1;8.8.8.8'
+    env_file:
+      - webpassword.env
+    volumes:
+      - 'pihole:/etc/pihole/'
+      - 'pihole-dnsmasq:/etc/dnsmasq.d/'
+    restart: unless-stopped
+    cap_add:
+      - "NET_ADMIN"
+    networks:
+      - pihole
+      - caddy
+    dns:
+      - 127.0.0.1
+      - 1.1.1.1

@@ -1,0 +1,39 @@
+services:
+  discovery:
+    image: syncthing/discosrv:1
+    container_name: syncthing-discovery
+    command: [ "-http", "-listen=:80" ]
+    volumes:
+      - discovery:/var/stdiscosrv
+    networks:
+      - syncthing
+      - caddy
+
+  syncthing:
+    image: syncthing/syncthing
+    container_name: syncthing
+    hostname: syncthing-hybras
+    networks:
+      - syncthing
+      - caddy
+    ports:
+      - 22000:22000/tcp # TCP file transfers
+      - 22000:22000/udp # QUIC file transfers
+      - 21027:21027/udp # Receive local discovery broadcasts
+    environment:
+      STGUIADDRESS: 0.0.0.0:80
+    volumes:
+      - syncthing:/var/syncthing
+      - /Users/hybras/Music:/var/syncthing/Music
+
+volumes:
+  discovery:
+    name: syncthing-discovery
+  syncthing:
+    name: syncthing
+
+networks:
+  syncthing:
+    name: syncthing
+  caddy:
+    external: true

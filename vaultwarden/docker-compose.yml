@@ -1,0 +1,30 @@
+version: '3' # https://github.com/dani-garcia/vaultwarden
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    restart: unless-stopped
+    mem_limit: 40MiB
+    environment:
+      WEBSOCKET_ENABLED: 'true' # Enable WebSocket notifications.
+      LOG_FILE: '/data/vaultwarden.log'
+      EXTENDED_LOGGING: 'true'
+      LOG_LEVEL: warn
+      TZ: 'America/New_York'
+    env_file:
+      - ./admin.env
+    volumes:
+      - vaultwarden:/data
+    networks:
+      - vaultwarden
+      - caddy
+
+networks:
+  vaultwarden:
+    name: vaultwarden
+  caddy:
+    external: true
+
+volumes:
+  vaultwarden:
+    name: vaultwarden

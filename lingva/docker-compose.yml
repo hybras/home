@@ -1,0 +1,20 @@
+version: '3'
+
+networks:
+  lingva:
+    name: lingva
+  caddy:
+    external: true
+
+services:
+
+  lingva:
+    container_name: lingva
+    image: ghcr.io/hybras/lingva:latest
+    restart: unless-stopped
+    environment:
+      PORT: 80
+    networks:
+      - lingva
+      - caddy
+    mem_limit: 590MiB

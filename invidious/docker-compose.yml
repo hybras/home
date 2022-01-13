@@ -1,0 +1,65 @@
+version: '3'
+
+volumes:
+  invidious-db:
+    name: invidious-db
+
+networks:
+  invidious:
+    name: invidious
+  caddy:
+    external: true
+
+services:
+  invidious-db:
+    image: postgres:14
+    container_name: invidious-db
+    restart: unless-stopped
+    volumes:
+      - ./config/sql:/config/sql
+      - ./docker/init-invidious-db.sh:/docker-entrypoint-initdb.d/init-invidious-db.sh
+      - invidious-db:/var/lib/postgresql/data
+    networks:
+      - invidious
+    mem_limit: 60MiB
+    environment:
+      POSTGRES_DB: invidious
+      POSTGRES_PASSWORD: kemal
+      POSTGRES_USER: kemal
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"
+        ]
+
+  invidious:
+    image: quay.io/invidious/invidious:latest-arm64
+    container_name: invidious
+    restart: unless-stopped
+    depends_on:
+      - invidious-db
+    mem_limit: 60MiB
+    networks:
+      - invidious
+      - caddy
+    environment:
+      INVIDIOUS_CONFIG: |
+        channel_threads: 1
+        check_tables: true
+        feed_threads: 1
+        db:
+          user: kemal
+          password: kemal
+          host: invidious-db
+          port: 5432
+          dbname: invidious
+        full_refresh: false
+        https_only: true
+        domain: youtube.hybras.dev
+        port: 80
+    healthcheck:
+      test: wget -nv --tries=1 --spider http://invidious/api/v1/comments/jNQXAC9IVRw || exit 1
+      interval: 30s
+      timeout: 5s
+      retries: 2

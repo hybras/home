@@ -1,0 +1,42 @@
+version: '3'
+
+volumes:
+  nitter-db:
+    name: nitter-db
+  nitter:
+    name: nitter
+
+networks:
+  nitter:
+    name: nitter
+  caddy:
+    external: true
+
+
+services:
+  nitter-db:
+    image: redis:alpine
+    container_name: nitter-db
+    restart: unless-stopped
+    volumes:
+      - nitter-db:/data
+    networks:
+      - nitter
+  nitter:
+    image: quay.io/unixfox/nitter:latest
+    container_name: nitter
+    restart: unless-stopped
+    depends_on:
+      - nitter-db
+    volumes:
+      - nitter:/data
+      - ./nitter.conf:/data/nitter.conf
+    networks:
+      - nitter
+      - caddy
+    healthcheck:
+      test: wget -nv --tries=1 --spider http://nitter/Jack/status/20 || exit 1
+      interval: 30s
+      timeout: 5s
+      retries: 2
+
