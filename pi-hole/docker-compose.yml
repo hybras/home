@@ -38,6 +38,7 @@ services:
     # Volumes store your data between container upgrades
     env_file:
       - pihole.env
+      - webpassword.env
     volumes:
       - 'pihole:/etc/pihole'
       - 'pihole-dnsmasq:/etc/dnsmasq.d'
