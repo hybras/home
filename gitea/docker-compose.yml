@@ -12,9 +12,8 @@ volumes:
   gitea-db:
     name: gitea-db
 
-
 services:
-  server:
+  gitea:
     image: gitea/gitea:1
     container_name: gitea
     restart: always
@@ -27,18 +26,6 @@ services:
       # - ./localtime:/etc/localtime:ro
     ports:
       - "2222:22"
-    environment:
-      - GITEA__server__DOMAIN=git.hybras.org
-      - GITEA__server__HTTP_PORT=80
-      - GITEA__server__SSH_PORT=2222
-      - GITEA__cors__ENABLED=true
-      - GITEA__cors__ALLOW_DOMAIN=hybras.dev
-      - GITEA__cors__ALLOW_SUBDOMAIN=true
-      - GITEA__database__DB_TYPE=postgres
-      - GITEA__database__HOST=gitea-db:5432
-      - GITEA__database__NAME=gitea
-      - GITEA__database__USER=gitea
-      - GITEA__database__PASSWD=gitea
     depends_on:
       - gitea-db
 
@@ -54,3 +41,4 @@ services:
       - gitea
     volumes:
       - gitea-db:/var/lib/postgresql/data
+      - ./gitea.ini:/data/gitea/conf/app.ini
