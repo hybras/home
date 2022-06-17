@@ -3,8 +3,6 @@ version: '3'
 networks:
   lingva:
     name: lingva
-  caddy:
-    external: true
 
 services:
 
@@ -22,5 +20,4 @@ services:
       PORT: 80
     networks:
       - lingva
-      - caddy
     mem_limit: 590MiB

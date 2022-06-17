@@ -9,8 +9,6 @@ volumes:
 networks:
   proxitok:
     name: proxitok
-  caddy:
-    external: true
 
 services:
 
@@ -27,7 +25,6 @@ services:
       - "proxitok-cache:/cache"
     networks:
       - proxitok
-      - caddy
     mem_limit: 300MiB
     depends_on:
       - proxitok-db
