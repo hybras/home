@@ -3,6 +3,8 @@ version: "3"
 networks:
   gitea:
     name: gitea
+  caddy:
+    external: true
 
 volumes:
   gitea:
@@ -18,6 +20,7 @@ services:
     restart: always
     networks:
       - gitea
+      - caddy
     volumes:
       - gitea:/data
       - ./timezone:/etc/timezone:ro

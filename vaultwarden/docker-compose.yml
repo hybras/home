@@ -13,10 +13,13 @@ services:
       - vaultwarden:/data
     networks:
       - vaultwarden
+      - caddy
 
 networks:
   vaultwarden:
     name: vaultwarden
+  caddy:
+    external: true
 
 volumes:
   vaultwarden:

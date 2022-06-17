@@ -9,6 +9,8 @@ volumes:
 networks:
   nitter:
     name: nitter
+  caddy:
+    external: true
 
 services:
   nitter-db:
@@ -30,6 +32,7 @@ services:
       - ./nitter.conf:/data/nitter.conf
     networks:
       - nitter
+      - caddy
     healthcheck:
       test: wget -nv --tries=1 --spider http://nitter/Jack/status/20 || exit 1
       interval: 30s

@@ -3,6 +3,8 @@ version: '3'
 networks:
   rimgo:
     name: rimgo
+  caddy:
+    external: true
 
 services:
   rimgo:
@@ -14,3 +16,4 @@ services:
     mem_limit: 40MiB
     networks:
       - rimgo
+      - caddy

@@ -7,6 +7,8 @@ volumes:
 networks:
   bibliogram:
     name: bibliogram
+  caddy:
+    external: true
 
 services:
   bibliogram:
@@ -19,3 +21,4 @@ services:
       - bibliogram-db:/app/db
     networks:
       - bibliogram
+      - caddy

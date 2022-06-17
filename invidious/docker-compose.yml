@@ -7,6 +7,8 @@ volumes:
 networks:
   invidious:
     name: invidious
+  caddy:
+    external: true
 
 services:
   invidious-db:
@@ -19,6 +21,7 @@ services:
       - invidious-db:/var/lib/postgresql/data
     networks:
       - invidious
+      - caddy
     mem_limit: 60MiB
     environment:
       POSTGRES_DB: invidious
