@@ -12,7 +12,7 @@ services:
   bibliogram:
     image: ghcr.io/xnaas/bibliogram:latest
     container_name: bibliogram
-    restart: unless-stopped
+    restart: always
     mem_limit: 100MiB
     volumes:
       - ./config.js:/config/config.js:ro
