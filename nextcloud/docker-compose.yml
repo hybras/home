@@ -1,0 +1,61 @@
+networks:
+  nextcloud:
+    name: nextcloud
+
+volumes:
+  nextcloud:
+  data:
+  cache:
+  db:
+  apps:
+  config:
+
+services:
+  cache:
+    image: redis:alpine
+    container_name: nextcloud_cache
+    restart: unless-stopped
+    networks:
+      - nextcloud
+    volumes:
+      - cache:/data
+
+  db:
+    image: mariadb:10.5
+    container_name: nextcloud_db
+    restart: unless-stopped
+    command: --transaction-isolation=READ-COMMITTED --log-bin --binlog-format=ROW
+    networks:
+      - nextcloud
+    volumes:
+      - db:/var/lib/mysql
+    env_file:
+      - ./db.env
+
+  nextcloud:
+    image: nextcloud
+    container_name: nextcloud
+    restart: unless-stopped
+    networks:
+      - nextcloud
+    depends_on:
+      - cache
+      - db
+    volumes:
+      - nextcloud:/var/www/html
+      - apps:/var/www/html/custom_apps
+      - config:/var/www/html/config
+      - data:/var/www/html/data
+    environment:
+      - NEXTCLOUD_ADMIN_USER=admin
+      - REDIS_HOST=cache
+      - NEXTCLOUD_TRUSTED_DOMAINS=cloud.hybras.dev
+      - MYSQL_HOST=db
+    env_file:
+      - ./db.env
+      - ./nextcloud_admin_password.env
+
+secrets:
+  nextcloud_admin_password:
+    file: ./nextcloud_admin_password.txt
+
