@@ -1,6 +1,21 @@
 {$PIHOLE_DOMAIN} {
 	encode gzip zstd
-	reverse_proxy pihole:80
+	reverse_proxy pihole:80 {
+		header_up X-Real-IP {remote_host}
+	}
+
+	tls {
+		dns duckdns {$DUCKDNS_TOKEN} {
+			override_domain {$DUCKDNS_DOMAIN}
+		}
+	}
+}
+
+http://pi.hole {
+	encode gzip zstd
+	reverse_proxy pihole:80 {
+		header_up X-Real-IP {remote_host}
+	}
 }
 
 {$REDDIT_DOMAIN} {
@@ -203,6 +218,20 @@
 	encode gzip
 
 	reverse_proxy gitea:80 {
+		header_up X-Real-IP {remote_host}
+	}
+}
+
+{$NEXTCLOUD_DOMAIN} {
+	tls {
+		dns duckdns {$DUCKDNS_TOKEN} {
+			override_domain {$DUCKDNS_DOMAIN}
+		}
+	}
+
+	encode gzip
+
+	reverse_proxy nextcloud:80 {
 		header_up X-Real-IP {remote_host}
 	}
 }

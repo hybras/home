@@ -23,6 +23,7 @@ services:
       - proxitok
       - rimgo
       - gitea
+      - pihole
     env_file:
       - ./caddy.env
       - ./duckdns.env
