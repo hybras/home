@@ -24,11 +24,13 @@ services:
       - rimgo
       - gitea
       - pihole
+      - nextcloud
     env_file:
       - ./caddy.env
       - ./duckdns.env
     environment:
       - LOG_DIR=/data
+    mem_limit: 40MiB
 
 networks:
   caddy:
@@ -52,6 +54,8 @@ networks:
   rimgo:
     external: true
   gitea:
+    external: true
+  nextcloud:
     external: true
 volumes:
   caddy:
