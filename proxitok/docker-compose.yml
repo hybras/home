@@ -15,6 +15,7 @@ services:
   proxitok:
     container_name: proxitok
     image: quay.io/pussthecatorg/proxitok:latest
+    restart: unless-stopped
     environment:
       - "LATTE_CACHE=/cache"
       - "API_CACHE=redis"
