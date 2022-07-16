@@ -40,6 +40,8 @@ services:
       - nextcloud:/var/www/html
     networks:
       - nextcloud
+    environment:
+      - NEXTCLOUD_INIT_LOCK=true
     entrypoint: /cron.sh
     depends_on:
       - db
@@ -63,6 +65,7 @@ services:
       - NEXTCLOUD_ADMIN_USER=admin
       - REDIS_HOST=cache
       - NEXTCLOUD_TRUSTED_DOMAINS=cloud.hybras.dev
+      - NEXTCLOUD_INIT_LOCK=true
       - MYSQL_HOST=db
     env_file:
       - ./db.env
