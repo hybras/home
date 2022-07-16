@@ -10,10 +10,11 @@ volumes:
   apps:
   config:
 
+
 services:
   cache:
     image: redis:alpine
-    container_name: nextcloud_cache
+    container_name: nextcloud-cache
     restart: unless-stopped
     networks:
       - nextcloud
@@ -22,7 +23,7 @@ services:
 
   db:
     image: mariadb:10.5
-    container_name: nextcloud_db
+    container_name: nextcloud-db
     restart: unless-stopped
     command: --transaction-isolation=READ-COMMITTED --log-bin --binlog-format=ROW
     networks:
@@ -31,6 +32,18 @@ services:
       - db:/var/lib/mysql
     env_file:
       - ./db.env
+  cron:
+    image: nextcloud
+    container_name: nextcloud-cron
+    restart: always
+    volumes:
+      - nextcloud:/var/www/html
+    networks:
+      - nextcloud
+    entrypoint: /cron.sh
+    depends_on:
+      - db
+      - cache
 
   nextcloud:
     image: nextcloud
@@ -58,4 +71,3 @@ services:
 secrets:
   nextcloud_admin_password:
     file: ./nextcloud_admin_password.txt
-
