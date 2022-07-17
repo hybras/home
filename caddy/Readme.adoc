@@ -6,5 +6,6 @@ Caddy needs env vars $DOMAIN and $EMAIL to run. Set them in `.env`.
 
 == https w/ duckdns
 
-https://github.com/dani-garcia/vaultwarden/wiki/Running-a-private-vaultwarden-instance-with-Let%27s-Encrypt-certs
-https://github.com/caddy-dns/duckdns#challenge-delegation
+Build my own image that builds my own caddy with the duckdns plugin
+
+== Add tailscale
