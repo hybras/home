@@ -19,14 +19,6 @@ http://pi.hole {
 }
 
 {$REDDIT_DOMAIN} {
-	log {
-		level INFO
-		output file {$LOG_DIR}/reddit.log {
-			roll_size 10MB
-			roll_keep 10
-		}
-	}
-
 	tls {
 		dns duckdns {$DUCKDNS_TOKEN} {
 			override_domain {$DUCKDNS_DOMAIN}
@@ -41,14 +33,6 @@ http://pi.hole {
 }
 
 {$VAULTWARDEN_DOMAIN} {
-	log {
-		level INFO
-		output file {$LOG_DIR}/vaultwarden.log {
-			roll_size 10MB
-			roll_keep 10
-		}
-	}
-
 	tls {
 		dns duckdns {$DUCKDNS_TOKEN} {
 			override_domain {$DUCKDNS_DOMAIN}
@@ -69,14 +53,6 @@ http://pi.hole {
 }
 
 {$BIBLIOGRAM_DOMAIN} {
-	log {
-		level INFO
-		output file {$LOG_DIR}/bibliogram.log {
-			roll_size 10MB
-			roll_keep 10
-		}
-	}
-
 	tls {
 		dns duckdns {$DUCKDNS_TOKEN} {
 			override_domain {$DUCKDNS_DOMAIN}
@@ -91,14 +67,6 @@ http://pi.hole {
 }
 
 {$INVIDIOUS_DOMAIN} {
-	log {
-		level INFO
-		output file {$LOG_DIR}/invidious.log {
-			roll_size 10MB
-			roll_keep 10
-		}
-	}
-
 	tls {
 		dns duckdns {$DUCKDNS_TOKEN} {
 			override_domain {$DUCKDNS_DOMAIN}
@@ -113,14 +81,6 @@ http://pi.hole {
 }
 
 {$LINGVA_DOMAIN} {
-	log {
-		level INFO
-		output file {$LOG_DIR}/lingva.log {
-			roll_size 10MB
-			roll_keep 10
-		}
-	}
-
 	tls {
 		dns duckdns {$DUCKDNS_TOKEN} {
 			override_domain {$DUCKDNS_DOMAIN}
@@ -135,14 +95,6 @@ http://pi.hole {
 }
 
 {$NITTER_DOMAIN} {
-	log {
-		level INFO
-		output file {$LOG_DIR}/nitter.log {
-			roll_size 10MB
-			roll_keep 10
-		}
-	}
-
 	tls {
 		dns duckdns {$DUCKDNS_TOKEN} {
 			override_domain {$DUCKDNS_DOMAIN}
@@ -157,14 +109,6 @@ http://pi.hole {
 }
 
 {$PROXITOK_DOMAIN} {
-	log {
-		level INFO
-		output file {$LOG_DIR}/proxitok.log {
-			roll_size 10MB
-			roll_keep 10
-		}
-	}
-
 	tls {
 		dns duckdns {$DUCKDNS_TOKEN} {
 			override_domain {$DUCKDNS_DOMAIN}
@@ -179,14 +123,6 @@ http://pi.hole {
 }
 
 {$RIMGO_DOMAIN} {
-	log {
-		level INFO
-		output file {$LOG_DIR}/rimgo.log {
-			roll_size 10MB
-			roll_keep 10
-		}
-	}
-
 	tls {
 		dns duckdns {$DUCKDNS_TOKEN} {
 			override_domain {$DUCKDNS_DOMAIN}
@@ -201,14 +137,6 @@ http://pi.hole {
 }
 
 {$GITEA_DOMAIN} {
-	log {
-		level INFO
-		output file {$LOG_DIR}/gitea.log {
-			roll_size 10MB
-			roll_keep 10
-		}
-	}
-
 	tls {
 		dns duckdns {$DUCKDNS_TOKEN} {
 			override_domain {$DUCKDNS_DOMAIN}
