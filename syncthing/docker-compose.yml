@@ -1,0 +1,17 @@
+services:
+  discovery:
+    image: syncthing/discosrv:1
+    container_name: syncthing-discovery
+    command: [ "-http", "-listen=:80" ]
+    volumes:
+      - discovery:/var/stdiscosrv
+    networks:
+      - syncthing
+
+volumes:
+  discovery:
+    name: syncthing-discovery
+
+networks:
+  syncthing:
+    name: syncthing
