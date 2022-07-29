@@ -22,6 +22,7 @@ services:
       - nextcloud
     volumes:
       - cache:/data
+    mem_limit: 20MiB
 
   db:
     image: mariadb:10.5
@@ -34,6 +35,7 @@ services:
       - db:/var/lib/mysql
     env_file:
       - ./db.env
+    mem_limit: 200MiB
   cron:
     image: nextcloud
     container_name: nextcloud-cron
@@ -48,7 +50,7 @@ services:
     depends_on:
       - db
       - cache
-
+    mem_limit: 20MiB
   nextcloud:
     image: nextcloud
     container_name: nextcloud
@@ -73,6 +75,7 @@ services:
     env_file:
       - ./db.env
       - ./nextcloud_admin_password.env
+    mem_limit: 200MiB
 
 secrets:
   nextcloud_admin_password:

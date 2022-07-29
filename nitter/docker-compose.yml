@@ -12,7 +12,6 @@ networks:
   caddy:
     external: true
 
-
 services:
   nitter-db:
     image: redis:alpine
@@ -22,6 +21,7 @@ services:
       - nitter-db:/data
     networks:
       - nitter
+    mem_limit: 20MiB
   nitter:
     image: quay.io/unixfox/nitter:latest
     container_name: nitter
@@ -39,4 +39,4 @@ services:
       interval: 30s
       timeout: 5s
       retries: 2
-
+    mem_limit: 40MiB
