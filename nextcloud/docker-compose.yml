@@ -4,7 +4,6 @@ networks:
   caddy:
     external: true
 
-
 volumes:
   nextcloud:
   data:
@@ -40,7 +39,7 @@ services:
     container_name: nextcloud-cron
     restart: always
     volumes:
-      - nextcloud:/var/www/html
+      - nextcloud:/var/www/html:rw
     networks:
       - nextcloud
     environment:
@@ -61,7 +60,7 @@ services:
       - cache
       - db
     volumes:
-      - nextcloud:/var/www/html
+      - nextcloud:/var/www/html:rw
       - apps:/var/www/html/custom_apps
       - config:/var/www/html/config
       - data:/var/www/html/data
