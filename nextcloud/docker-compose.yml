@@ -37,22 +37,25 @@ services:
       - ./db.env
     mem_limit: 200MiB
   cron:
-    image: nextcloud
+    image: nextcloud:24
     container_name: nextcloud-cron
     restart: always
     volumes:
-      - nextcloud:/var/www/html:rw
+      - nextcloud:/var/www/html
+      - config:/var/www/html/config
+      - apps:/var/www/html/custom_apps
+      - data:/var/www/html/data
     networks:
       - nextcloud
-    environment:
-      - NEXTCLOUD_INIT_LOCK=true
+    environment: {}
+      # - NEXTCLOUD_INIT_LOCK=true
     entrypoint: /cron.sh
     depends_on:
       - db
       - cache
     mem_limit: 20MiB
   nextcloud:
-    image: nextcloud
+    image: nextcloud:24
     container_name: nextcloud
     restart: unless-stopped
     networks:
@@ -70,7 +73,7 @@ services:
       - NEXTCLOUD_ADMIN_USER=admin
       - REDIS_HOST=cache
       - NEXTCLOUD_TRUSTED_DOMAINS=cloud.hybras.dev
-      - NEXTCLOUD_INIT_LOCK=true
+      # - NEXTCLOUD_INIT_LOCK=true
       - MYSQL_HOST=db
     env_file:
       - ./db.env
