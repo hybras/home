@@ -55,7 +55,12 @@ services:
       - cache
     mem_limit: 20MiB
   nextcloud:
-    image: nextcloud:24
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      pull: true
+      tags:
+        - "nextcloud:preview"
     container_name: nextcloud
     restart: unless-stopped
     networks:
