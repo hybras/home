@@ -1,0 +1,13 @@
+{$NITTER_DOMAIN} {
+	tls {
+		dns duckdns {$DUCKDNS_TOKEN} {
+			override_domain {$DUCKDNS_DOMAIN}
+		}
+	}
+
+	encode gzip
+
+	reverse_proxy nitter:80 {
+		header_up X-Real-IP {remote_host}
+	}
+}
