@@ -1,0 +1,6 @@
+preview:
+    # Installs ffmpeg, which is used for video thumnails and previews
+    # https://github.com/nextcloud/docker/issues/1432
+    # https://github.com/nextcloud/docker/issues/1432#issuecomment-806650928
+    docker compose exec nextcloud apt-get update
+    docker compose exec nextcloud apt-get install -y ffmpeg
