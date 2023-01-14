@@ -4,10 +4,7 @@ This repository is a rough spec of what my home server runs. I'm using watchtowe
 
 == TODO
 
-* Bitwarden
-* Nextcloud
 * Use `service.deploy.resources.limits.memory` instead of `service.mem_limit`
-* pi hole
 * more apps from linuxserver.io
 ** calibre
 ** freshrss
@@ -16,7 +13,6 @@ This repository is a rough spec of what my home server runs. I'm using watchtowe
 *** jellyfin
 ** Beets
 ** Heimdall
-** duckdns
 ** Duplicati
 ** libreoffice
 ** paperless
@@ -74,7 +70,7 @@ This repository is a rough spec of what my home server runs. I'm using watchtowe
 
 | Google Cloud Sync
 | Nextcloud
-| ❌
+| https://cloud.hybras.dev[✅]
 | Massive undertaking
 
 | Bitwarden
