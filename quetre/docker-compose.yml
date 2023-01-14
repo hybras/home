@@ -1,0 +1,18 @@
+version: '3'
+
+networks:
+  quetre:
+    name: quetre
+  caddy:
+    external: true
+
+services:
+
+  quetre:
+    container_name: quetre
+    image: codeberg.org/video-prize-ranch/quetre:latest
+    restart: unless-stopped
+    networks:
+      - quetre
+      - caddy
+    mem_limit: 590MiB
