@@ -1,12 +1,9 @@
 ARG CADDY_VERSION=2.10.0
-ARG CADDY=caddy:${CADDY_VERSION}
+FROM caddy:${CADDY_VERSION}-builder AS builder
 
-FROM alpine:3.16 as build
-ARG CADDY_VERSION
-RUN apk --no-cache add go git
-RUN go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest
-RUN /root/go/bin/xcaddy build v"${CADDY_VERSION}" \
-    --with github.com/caddy-dns/duckdns --output /root/go/bin
+RUN xcaddy build v"${CADDY_VERSION}" \
+    --with github.com/caddy-dns/duckdns
 
-FROM ${CADDY} as app
-COPY --from=build /root/go/bin/caddy /usr/bin/caddy
+FROM caddy:${CADDY_VERSION}-alpine
+
+COPY --from=builder /usr/bin/caddy /usr/bin/caddy
