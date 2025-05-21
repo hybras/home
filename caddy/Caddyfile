@@ -1,3 +1,11 @@
+{
+	tls {
+		dns duckdns {$DUCKDNS_TOKEN} {
+			override_domain {$DUCKDNS_DOMAIN}
+		}
+	}
+}
+
 {$PIHOLE_DOMAIN} {
 	encode gzip zstd
 	reverse_proxy pihole:80 {
@@ -19,12 +27,6 @@ http://pi.hole {
 }
 
 {$REDDIT_DOMAIN} {
-	tls {
-		dns duckdns {$DUCKDNS_TOKEN} {
-			override_domain {$DUCKDNS_DOMAIN}
-		}
-	}
-
 	encode gzip
 
 	reverse_proxy libreddit:80 {
@@ -33,12 +35,6 @@ http://pi.hole {
 }
 
 {$VAULTWARDEN_DOMAIN} {
-	tls {
-		dns duckdns {$DUCKDNS_TOKEN} {
-			override_domain {$DUCKDNS_DOMAIN}
-		}
-	}
-
 	encode gzip
 
 	# Notifications redirected to the WebSocket server
@@ -53,12 +49,6 @@ http://pi.hole {
 }
 
 {$BIBLIOGRAM_DOMAIN} {
-	tls {
-		dns duckdns {$DUCKDNS_TOKEN} {
-			override_domain {$DUCKDNS_DOMAIN}
-		}
-	}
-
 	encode gzip
 
 	reverse_proxy bibliogram:80 {
@@ -67,12 +57,6 @@ http://pi.hole {
 }
 
 {$INVIDIOUS_DOMAIN} {
-	tls {
-		dns duckdns {$DUCKDNS_TOKEN} {
-			override_domain {$DUCKDNS_DOMAIN}
-		}
-	}
-
 	encode gzip
 
 	reverse_proxy invidious:80 {
@@ -81,12 +65,6 @@ http://pi.hole {
 }
 
 {$LINGVA_DOMAIN} {
-	tls {
-		dns duckdns {$DUCKDNS_TOKEN} {
-			override_domain {$DUCKDNS_DOMAIN}
-		}
-	}
-
 	encode gzip
 
 	reverse_proxy lingva:80 {
@@ -95,12 +73,6 @@ http://pi.hole {
 }
 
 {$NITTER_DOMAIN} {
-	tls {
-		dns duckdns {$DUCKDNS_TOKEN} {
-			override_domain {$DUCKDNS_DOMAIN}
-		}
-	}
-
 	encode gzip
 
 	reverse_proxy nitter:80 {
@@ -109,12 +81,6 @@ http://pi.hole {
 }
 
 {$PROXITOK_DOMAIN} {
-	tls {
-		dns duckdns {$DUCKDNS_TOKEN} {
-			override_domain {$DUCKDNS_DOMAIN}
-		}
-	}
-
 	encode gzip
 
 	reverse_proxy proxitok:80 {
@@ -123,12 +89,6 @@ http://pi.hole {
 }
 
 {$RIMGO_DOMAIN} {
-	tls {
-		dns duckdns {$DUCKDNS_TOKEN} {
-			override_domain {$DUCKDNS_DOMAIN}
-		}
-	}
-
 	encode gzip
 
 	reverse_proxy rimgo:80 {
@@ -137,12 +97,6 @@ http://pi.hole {
 }
 
 {$GITEA_DOMAIN} {
-	tls {
-		dns duckdns {$DUCKDNS_TOKEN} {
-			override_domain {$DUCKDNS_DOMAIN}
-		}
-	}
-
 	encode gzip
 
 	reverse_proxy gitea:80 {
@@ -151,12 +105,6 @@ http://pi.hole {
 }
 
 {$NEXTCLOUD_DOMAIN} {
-	tls {
-		dns duckdns {$DUCKDNS_TOKEN} {
-			override_domain {$DUCKDNS_DOMAIN}
-		}
-	}
-
 	encode gzip
 
 	reverse_proxy nextcloud:80 {
@@ -165,12 +113,6 @@ http://pi.hole {
 }
 
 {$SYNCTHING_DISCOVERY_DOMAIN} {
-	tls {
-		dns duckdns {$DUCKDNS_TOKEN} {
-			override_domain {$DUCKDNS_DOMAIN}
-		}
-	}
-
 	encode gzip
 
 	reverse_proxy syncthing-discovery:80 {
@@ -179,12 +121,6 @@ http://pi.hole {
 }
 
 {$SYNCTHING_DOMAIN} {
-	tls {
-		dns duckdns {$DUCKDNS_TOKEN} {
-			override_domain {$DUCKDNS_DOMAIN}
-		}
-	}
-
 	encode gzip
 
 	reverse_proxy syncthing:80 {
@@ -193,12 +129,6 @@ http://pi.hole {
 }
 
 {$QUETRE_DOMAIN} {
-	tls {
-		dns duckdns {$DUCKDNS_TOKEN} {
-			override_domain {$DUCKDNS_DOMAIN}
-		}
-	}
-
 	encode gzip
 
 	reverse_proxy quetre:80 {
