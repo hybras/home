@@ -27,7 +27,7 @@ http://pi.hole {
 
 	encode gzip
 
-	reverse_proxy libreddit:8080 {
+	reverse_proxy libreddit:80 {
 		header_up X-Real-IP {remote_host}
 	}
 }

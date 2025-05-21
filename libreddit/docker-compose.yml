@@ -21,3 +21,5 @@ services:
       interval: 30s
       timeout: 5s
       retries: 2
+    environment:
+      PORT: '80'
