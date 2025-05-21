@@ -12,6 +12,7 @@ services:
     container_name: libreddit
     restart: unless-stopped
     mem_limit: 40MiB
+    command: []
     networks:
       - libreddit
       - caddy

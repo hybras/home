@@ -2,7 +2,9 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - 'master'
+      - 'main'
+    paths:
+      - 'caddy/Dockerfile'
 
 jobs:
   image:
