@@ -1,3 +1,4 @@
+name: Caddy Image
 on:
   workflow_dispatch:
   push:
@@ -5,6 +6,7 @@ on:
       - 'main'
     paths:
       - 'caddy/Dockerfile'
+      - '.github/workflows/caddy.yml'
 
 jobs:
   image:
