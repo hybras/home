@@ -6,7 +6,7 @@ networks:
 
 services:
   libreddit:
-    image: spikecodes/libreddit:arm
+    image: quay.io/redlib/redlib:latest
     container_name: libreddit
     restart: unless-stopped
     mem_limit: 40MiB
