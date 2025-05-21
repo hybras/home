@@ -1,8 +1,4 @@
-# cant use mem_limit in a 3.x docker-compose file in non swarm mode
-# see https://github.com/docker/compose/issues/4513
 # https://benbusby.com/projects/whoogle-search/
-version: "2.4"
-
 services:
   whoogle-search:
     image: benbusby/whoogle-search

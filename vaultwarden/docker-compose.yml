@@ -1,4 +1,5 @@
-version: '3' # https://github.com/dani-garcia/vaultwarden
+# https://github.com/dani-garcia/vaultwarden
+
 services:
   vaultwarden:
     image: vaultwarden/server:latest
