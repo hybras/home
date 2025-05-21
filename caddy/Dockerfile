@@ -1,7 +1,7 @@
 ARG CADDY_VERSION=2.10.0
 FROM caddy:${CADDY_VERSION}-builder AS builder
 
-RUN xcaddy build v"${CADDY_VERSION}" \
+RUN xcaddy build "v${CADDY_VERSION}" \
     --with github.com/caddy-dns/duckdns
 
 FROM caddy:${CADDY_VERSION}-alpine
