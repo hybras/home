@@ -1,6 +1,6 @@
 build version:
     docker build -t ghcr.io/hybras/home-setup/caddy:{{version}} --build-arg CADDY_VERSION={{version}} .
 reload:
-    docker compose exec caddy caddy reload -config /etc/caddy/Caddyfile
+    docker compose exec caddy caddy reload --config /etc/caddy/Caddyfile
 sh:
     docker compose exec -it caddy sh
