@@ -4,25 +4,25 @@
 	}
 }
 
-{$PIHOLE_DOMAIN} {
-	encode gzip zstd
-	reverse_proxy pihole:80 {
-		header_up X-Real-IP {remote_host}
-	}
+# {$PIHOLE_DOMAIN} {
+# 	encode gzip zstd
+# 	reverse_proxy pihole:80 {
+# 		header_up X-Real-IP {remote_host}
+# 	}
 
-	tls {
-		dns duckdns {$DUCKDNS_TOKEN} {
-			override_domain {$DUCKDNS_DOMAIN}
-		}
-	}
-}
+# 	tls {
+# 		dns duckdns {$DUCKDNS_TOKEN} {
+# 			override_domain {$DUCKDNS_DOMAIN}
+# 		}
+# 	}
+# }
 
-http://pi.hole {
-	encode gzip zstd
-	reverse_proxy pihole:80 {
-		header_up X-Real-IP {remote_host}
-	}
-}
+# http://pi.hole {
+# 	encode gzip zstd
+# 	reverse_proxy pihole:80 {
+# 		header_up X-Real-IP {remote_host}
+# 	}
+# }
 
 {$REDDIT_DOMAIN} {
 	encode gzip
@@ -32,104 +32,104 @@ http://pi.hole {
 	}
 }
 
-{$VAULTWARDEN_DOMAIN} {
-	encode gzip
+# {$VAULTWARDEN_DOMAIN} {
+# 	encode gzip
 
-	# Notifications redirected to the WebSocket server
-	reverse_proxy /notifications/hub vaultwarden:3012
+# 	# Notifications redirected to the WebSocket server
+# 	reverse_proxy /notifications/hub vaultwarden:3012
 
-	# Proxy everything else to Rocket
-	reverse_proxy vaultwarden:80 {
-		# Send the true remote IP to Rocket, so that vaultwarden can put this in the
-		# log, so that fail2ban can ban the correct IP.
-		header_up X-Real-IP {remote_host}
-	}
-}
+# 	# Proxy everything else to Rocket
+# 	reverse_proxy vaultwarden:80 {
+# 		# Send the true remote IP to Rocket, so that vaultwarden can put this in the
+# 		# log, so that fail2ban can ban the correct IP.
+# 		header_up X-Real-IP {remote_host}
+# 	}
+# }
 
-{$BIBLIOGRAM_DOMAIN} {
-	encode gzip
+# {$BIBLIOGRAM_DOMAIN} {
+# 	encode gzip
 
-	reverse_proxy bibliogram:80 {
-		header_up X-Real-IP {remote_host}
-	}
-}
+# 	reverse_proxy bibliogram:80 {
+# 		header_up X-Real-IP {remote_host}
+# 	}
+# }
 
-{$INVIDIOUS_DOMAIN} {
-	encode gzip
+# {$INVIDIOUS_DOMAIN} {
+# 	encode gzip
 
-	reverse_proxy invidious:80 {
-		header_up X-Real-IP {remote_host}
-	}
-}
+# 	reverse_proxy invidious:80 {
+# 		header_up X-Real-IP {remote_host}
+# 	}
+# }
 
-{$LINGVA_DOMAIN} {
-	encode gzip
+# {$LINGVA_DOMAIN} {
+# 	encode gzip
 
-	reverse_proxy lingva:80 {
-		header_up X-Real-IP {remote_host}
-	}
-}
+# 	reverse_proxy lingva:80 {
+# 		header_up X-Real-IP {remote_host}
+# 	}
+# }
 
-{$NITTER_DOMAIN} {
-	encode gzip
+# {$NITTER_DOMAIN} {
+# 	encode gzip
 
-	reverse_proxy nitter:80 {
-		header_up X-Real-IP {remote_host}
-	}
-}
+# 	reverse_proxy nitter:80 {
+# 		header_up X-Real-IP {remote_host}
+# 	}
+# }
 
-{$PROXITOK_DOMAIN} {
-	encode gzip
+# {$PROXITOK_DOMAIN} {
+# 	encode gzip
 
-	reverse_proxy proxitok:80 {
-		header_up X-Real-IP {remote_host}
-	}
-}
+# 	reverse_proxy proxitok:80 {
+# 		header_up X-Real-IP {remote_host}
+# 	}
+# }
 
-{$RIMGO_DOMAIN} {
-	encode gzip
+# {$RIMGO_DOMAIN} {
+# 	encode gzip
 
-	reverse_proxy rimgo:80 {
-		header_up X-Real-IP {remote_host}
-	}
-}
+# 	reverse_proxy rimgo:80 {
+# 		header_up X-Real-IP {remote_host}
+# 	}
+# }
 
-{$GITEA_DOMAIN} {
-	encode gzip
+# {$GITEA_DOMAIN} {
+# 	encode gzip
 
-	reverse_proxy gitea:80 {
-		header_up X-Real-IP {remote_host}
-	}
-}
+# 	reverse_proxy gitea:80 {
+# 		header_up X-Real-IP {remote_host}
+# 	}
+# }
 
-{$NEXTCLOUD_DOMAIN} {
-	encode gzip
+# {$NEXTCLOUD_DOMAIN} {
+# 	encode gzip
 
-	reverse_proxy nextcloud:80 {
-		header_up X-Real-IP {remote_host}
-	}
-}
+# 	reverse_proxy nextcloud:80 {
+# 		header_up X-Real-IP {remote_host}
+# 	}
+# }
 
-{$SYNCTHING_DISCOVERY_DOMAIN} {
-	encode gzip
+# {$SYNCTHING_DISCOVERY_DOMAIN} {
+# 	encode gzip
 
-	reverse_proxy syncthing-discovery:80 {
-		header_up X-Real-IP {remote_host}
-	}
-}
+# 	reverse_proxy syncthing-discovery:80 {
+# 		header_up X-Real-IP {remote_host}
+# 	}
+# }
 
-{$SYNCTHING_DOMAIN} {
-	encode gzip
+# {$SYNCTHING_DOMAIN} {
+# 	encode gzip
 
-	reverse_proxy syncthing:80 {
-		header_up X-Real-IP {remote_host}
-	}
-}
+# 	reverse_proxy syncthing:80 {
+# 		header_up X-Real-IP {remote_host}
+# 	}
+# }
 
-{$QUETRE_DOMAIN} {
-	encode gzip
+# {$QUETRE_DOMAIN} {
+# 	encode gzip
 
-	reverse_proxy quetre:80 {
-		header_up X-Real-IP {remote_host}
-	}
-}
+# 	reverse_proxy quetre:80 {
+# 		header_up X-Real-IP {remote_host}
+# 	}
+# }
