@@ -1,3 +1,0 @@
-= Beatbump
-
-Beatbump is being rewritten at May 2022. Check again in Aug. There also appears to be a https://hub.docker.com/r/snuffydev/beatbump[docker image]
