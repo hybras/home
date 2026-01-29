@@ -1,7 +1,8 @@
 {
-	dns duckdns {env.DUCKDNS_TOKEN} {
-		override_domain {env.DUCKDNS_DOMAIN}
-	}
+	# dns duckdns {env.DUCKDNS_TOKEN} {
+	# 	override_domain {env.DUCKDNS_DOMAIN}
+	# }
+	acme_dns cloudflare {env.CLOUDFLARE_TOKEN}
 }
 
 # {$PIHOLE_DOMAIN} {
