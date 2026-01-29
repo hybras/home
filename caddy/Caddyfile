@@ -25,7 +25,7 @@
 # 	}
 # }
 
-{$REDDIT_DOMAIN} {
+http://{$REDDIT_DOMAIN} {
 	encode gzip
 
 	reverse_proxy libreddit:80 {
