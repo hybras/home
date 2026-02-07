@@ -1,12 +1,13 @@
 volumes:
-  invidious-db:
-    name: invidious-db
+  invidious-db: { name: invidious-db }
+  invidious-companion-cache: { name: invidious-companion-cache }
 
 networks:
-  invidious:
-    name: invidious
-  caddy:
-    external: true
+  invidious: { name: invidious }
+  caddy: { external: true }
+
+configs:
+  invidious: { file: ./invidious.yml }
 
 services:
   invidious-db:
@@ -32,7 +33,7 @@ services:
         ]
 
   invidious:
-    image: quay.io/invidious/invidious:latest-arm64
+    image: quay.io/invidious/invidious:latest
     container_name: invidious
     restart: unless-stopped
     depends_on:
@@ -41,23 +42,32 @@ services:
     networks:
       - invidious
       - caddy
+    configs:
+      - source: invidious
+        target: /invidious/config/config.yml
     environment:
-      INVIDIOUS_CONFIG: |
-        channel_threads: 1
-        check_tables: true
-        feed_threads: 1
-        db:
-          user: kemal
-          password: kemal
-          host: invidious-db
-          port: 5432
-          dbname: invidious
-        full_refresh: false
-        https_only: true
-        domain: youtube.hybras.dev
-        port: 80
+      - INVIDIOUS_HMAC_KEY=${INVIDIOUS_HMAC_KEY}
+      - INVIDIOUS_INVIDIOUS_COMPANION_KEY=${INVIDIOUS_COMPANION_KEY}
     healthcheck:
       test: wget -nv --tries=1 --spider http://invidious/api/v1/comments/jNQXAC9IVRw || exit 1
       interval: 30s
       timeout: 5s
       retries: 2
+  companion:
+    image: quay.io/invidious/invidious-companion:latest
+    networks:
+      - invidious
+    environment:
+       - SERVER_SECRET_KEY=CHANGE_ME=${INVIDIOUS_COMPANION_KEY}
+    restart: unless-stopped
+    logging:
+      options:
+        max-size: "1G"
+        max-file: "4"
+    cap_drop:
+      - ALL
+    read_only: true
+    volumes:
+      - companioncache:/var/tmp/youtubei.js:rw
+    security_opt:
+      - no-new-privileges:true
