@@ -7,8 +7,10 @@ services:
       - 80:80 # Needed for the ACME HTTP-01 challenge.
       - 443:443
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy:/data
+    configs:
+      - source: caddy
+        target: /etc/caddy/Caddyfile
     networks:
       - caddy
     env_file:
@@ -24,3 +26,6 @@ networks:
 volumes:
   caddy:
     name: caddy
+configs:
+  caddy:
+    file: ./Caddyfile
