@@ -60,7 +60,7 @@ services:
       - invidious
     environment:
       - PORT=80
-       - SERVER_SECRET_KEY=${INVIDIOUS_COMPANION_KEY}
+      - SERVER_SECRET_KEY=${INVIDIOUS_COMPANION_KEY}
     restart: unless-stopped
     logging:
       options:
