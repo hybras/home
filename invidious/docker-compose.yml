@@ -68,6 +68,6 @@ services:
       - ALL
     read_only: true
     volumes:
-      - companioncache:/var/tmp/youtubei.js:rw
+      - invidious-companion-cache:/var/tmp/youtubei.js:rw
     security_opt:
       - no-new-privileges:true
