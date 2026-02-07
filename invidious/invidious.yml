@@ -1,0 +1,15 @@
+channel_threads: 1
+check_tables: true
+feed_threads: 1
+db:
+  user: kemal
+  password: kemal
+  host: invidious-db
+  port: 5432
+  dbname: invidious
+full_refresh: false
+https_only: true
+domain: youtube.hybras.dev
+port: 80
+invidious_companion:
+- private_url: "http://companion:8282/companion"
