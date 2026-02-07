@@ -71,13 +71,13 @@
 # 	}
 # }
 
-# {$NITTER_DOMAIN} {
-# 	encode gzip
+{$NITTER_DOMAIN} {
+	encode gzip
 
-# 	reverse_proxy nitter:80 {
-# 		header_up X-Real-IP {remote_host}
-# 	}
-# }
+	reverse_proxy nitter:80 {
+		header_up X-Real-IP {remote_host}
+	}
+}
 
 # {$PROXITOK_DOMAIN} {
 # 	encode gzip
