@@ -12,4 +12,4 @@ https_only: true
 domain: youtube.hybras.dev
 port: 80
 invidious_companion:
-- private_url: "http://companion:8282/companion"
+- private_url: "http://invidious-companion/companion"

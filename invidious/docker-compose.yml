@@ -55,9 +55,11 @@ services:
       retries: 2
   companion:
     image: quay.io/invidious/invidious-companion:latest
+    container_name: invidious-companion
     networks:
       - invidious
     environment:
+      - PORT=80
        - SERVER_SECRET_KEY=CHANGE_ME=${INVIDIOUS_COMPANION_KEY}
     restart: unless-stopped
     logging:
