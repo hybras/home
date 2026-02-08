@@ -10,6 +10,9 @@ networks:
   caddy:
     external: true
 
+configs:
+  nitter: { file: ./nitter.conf }
+
 services:
   nitter-db:
     image: redis:alpine
@@ -28,7 +31,9 @@ services:
       - nitter-db
     volumes:
       - nitter:/data
-      - ./nitter.conf:/data/nitter.conf
+    configs:
+      - source: nitter
+        target: /src/nitter.conf
     networks:
       - nitter
       - caddy
