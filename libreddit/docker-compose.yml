@@ -10,6 +10,11 @@ services:
     container_name: libreddit
     restart: unless-stopped
     mem_limit: 40MiB
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
     networks:
       - libreddit
       - caddy
