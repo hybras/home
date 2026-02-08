@@ -21,7 +21,7 @@ services:
       - nitter
     mem_limit: 20MiB
   nitter:
-    image: quay.io/unixfox/nitter:build-20221012
+    image: zedeus/nitter:latest
     container_name: nitter
     restart: unless-stopped
     depends_on:
