@@ -19,6 +19,14 @@ services:
     environment:
       - LOG_DIR=/data
     mem_limit: 40MiB
+    develop:
+      watch:
+        - path: ./Caddyfile
+          target: /etc/caddy/Caddyfile
+          action: sync+exec
+          exec:
+            command: caddy reload --config /etc/caddy/Caddyfile
+          
 
 networks:
   caddy:
