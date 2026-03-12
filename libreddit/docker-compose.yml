@@ -25,3 +25,6 @@ services:
       retries: 2
     environment:
       PORT: '80'
+    labels:
+      caddy: ${REDDIT_DOMAIN}
+      caddy.reverse_proxy: "{{upstreams 80}}"

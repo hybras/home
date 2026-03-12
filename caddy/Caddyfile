@@ -24,13 +24,7 @@
 # 	}
 # }
 
-{$REDDIT_DOMAIN} {
-	encode gzip
-
-	reverse_proxy libreddit:80 {
-		header_up X-Real-IP {remote_host}
-	}
-}
+# {${REDDIT_DOMAIN}} is now handled via caddy-docker-proxy labels on the libreddit container.
 
 # {$VAULTWARDEN_DOMAIN} {
 # 	encode gzip
