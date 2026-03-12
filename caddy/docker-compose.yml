@@ -8,7 +8,9 @@ services:
       - 443:443
     volumes:
       - caddy:/data
-      - ./Caddyfile:/etc/caddy/Caddyfile
+    configs:
+      - source: caddy
+        target: /etc/caddy/Caddyfile
     networks:
       - caddy
     env_file:
@@ -32,3 +34,6 @@ networks:
 volumes:
   caddy:
     name: caddy
+configs:
+  caddy:
+    file: ./Caddyfile
