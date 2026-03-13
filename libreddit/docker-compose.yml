@@ -6,7 +6,8 @@ networks:
 
 services:
   libreddit:
-    image: quay.io/redlib/redlib:latest
+    image: ghcr.io/hybras/redlib:latest
+    build: .
     container_name: libreddit
     restart: unless-stopped
     mem_limit: 40MiB
