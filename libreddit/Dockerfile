@@ -14,7 +14,7 @@ WORKDIR /redlib
 RUN git clone https://github.com/redlib-org/redlib . && \
     git fetch origin pull/509/head:pr509 && \
     git checkout pr509 && \
-    cargo fetch --locked --bin redlib
+    cargo fetch --locked
 
 RUN echo "fn main() { panic!(\"why am i running?\") }" > src/main.rs
 RUN cargo build --release --locked --bin redlib
