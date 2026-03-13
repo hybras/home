@@ -4,46 +4,17 @@
 	}
 }
 
-# {$PIHOLE_DOMAIN} {
-# 	encode gzip zstd
-# 	reverse_proxy pihole:80 {
-# 		header_up X-Real-IP {remote_host}
-# 	}
-
-# 	tls {
-# 		dns duckdns {$DUCKDNS_TOKEN} {
-# 			override_domain {$DUCKDNS_DOMAIN}
-# 		}
-# 	}
-# }
-
-# http://pi.hole {
+# {$PIHOLE_DOMAIN} http://pi.hole {
 # 	encode gzip zstd
 # 	reverse_proxy pihole:80 {
 # 		header_up X-Real-IP {remote_host}
 # 	}
 # }
-
-# {${REDDIT_DOMAIN}} is now handled via caddy-docker-proxy labels on the libreddit container.
 
 # {$VAULTWARDEN_DOMAIN} {
 # 	encode gzip
 
 # 	# Notifications redirected to the WebSocket server
 # 	reverse_proxy /notifications/hub vaultwarden:3012
-
-# 	# Proxy everything else to Rocket
-# 	reverse_proxy vaultwarden:80 {
-# 		# Send the true remote IP to Rocket, so that vaultwarden can put this in the
-# 		# log, so that fail2ban can ban the correct IP.
-# 		header_up X-Real-IP {remote_host}
-# 	}
+# 	reverse_proxy vaultwarden:80
 # }
-
-{$NITTER_DOMAIN} {
-	encode gzip
-
-	reverse_proxy nitter:80 {
-		header_up X-Real-IP {remote_host}
-	}
-}
