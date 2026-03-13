@@ -11,7 +11,7 @@ RUN apk add --no-cache musl-dev perl make git
 WORKDIR /redlib
 
 # download (most) dependencies in their own layer
-RUN git clone https://github.com/redlib-org/redlib && \
+RUN git clone https://github.com/redlib-org/redlib . && \
     git fetch origin pull/509/head:pr509 && \
     git checkout pr509 && \
     cargo fetch --locked --bin redlib
