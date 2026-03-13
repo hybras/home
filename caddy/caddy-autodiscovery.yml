@@ -1,0 +1,9 @@
+networks:
+  caddy:
+    external: true
+
+services:
+  caddy_autodiscovery:
+    labels:
+      caddy: ${DOMAIN}
+      caddy.reverse_proxy: "{{upstreams 80}}"

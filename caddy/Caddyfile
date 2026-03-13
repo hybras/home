@@ -40,14 +40,6 @@
 # 	}
 # }
 
-{$INVIDIOUS_DOMAIN} {
-	encode gzip
-
-	reverse_proxy invidious:80 {
-		header_up X-Real-IP {remote_host}
-	}
-}
-
 {$NITTER_DOMAIN} {
 	encode gzip
 
