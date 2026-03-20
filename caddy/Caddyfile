@@ -4,6 +4,7 @@
 	}
 	tailscale {
 		ephemeral
+		tags tag:caddy
 	}
 	default_bind tailscale/caddy
 }
