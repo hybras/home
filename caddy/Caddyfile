@@ -11,6 +11,15 @@
 	}
 }
 
+{$REDDIT_DOMAIN} {
+	reverse_proxy libreddit:80
+}
+
+{$INVIDIOUS_DOMAIN} {
+	reverse_proxy invidious:80
+}
+
+
 # {$PIHOLE_DOMAIN} http://pi.hole {
 # 	encode gzip zstd
 # 	reverse_proxy pihole:80 {
