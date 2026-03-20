@@ -23,12 +23,9 @@
 	reverse_proxy invidious:80
 }
 
-# {$PIHOLE_DOMAIN} http://pi.hole {
-# 	encode gzip zstd
-# 	reverse_proxy pihole:80 {
-# 		header_up X-Real-IP {remote_host}
-# 	}
-# }
+{$PIHOLE_DOMAIN} {
+	reverse_proxy pihole:80
+}
 
 # {$VAULTWARDEN_DOMAIN} {
 # 	encode gzip
