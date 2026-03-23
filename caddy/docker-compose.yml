@@ -20,6 +20,9 @@ services:
       - LOG_DIR=/data
       - CADDY_INGRESS_NETWORKS=caddy
     mem_limit: 40MiB
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
 
 networks:
   caddy:
