@@ -2,6 +2,7 @@
 	acme_dns cloudflare {env.CLOUDFLARE_TOKEN} {
 		resolvers 1.1.1.1 8.8.8.8
 	}
+	dns cloudflare {env.CLOUDFLARE_TOKEN}
 	tailscale {
 		ephemeral
 		tags tag:caddy
