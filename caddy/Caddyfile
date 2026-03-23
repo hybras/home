@@ -17,7 +17,12 @@
 	}
 }
 
-{$REDDIT_DOMAIN} {
+# {$REDDIT_DOMAIN} {
+# 	reverse_proxy libreddit:80
+# }
+
+reddit.{$TAILNET} {
+	bind tailscale/reddit
 	reverse_proxy libreddit:80
 }
 
