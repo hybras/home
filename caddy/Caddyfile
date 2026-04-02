@@ -10,13 +10,14 @@
 }
 
 :80 {
+	bind 0.0.0.0
 	respond "Hello, World!"
 }
 
 :443 {
+	bind 0.0.0.0
 	respond "Hello, World!"
 }
-
 
 {$HEADSCALE_DOMAIN} {
 	reverse_proxy headscale:80
