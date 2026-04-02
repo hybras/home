@@ -7,15 +7,23 @@
 		ephemeral
 		tags tag:caddy
 	}
-	default_bind tailscale/caddy
 }
 
-http://192.168.1.85 {
-	bind 0.0.0.0
+:80 {
 	respond "Hello, World!"
 }
 
+:443 {
+	respond "Hello, World!"
+}
+
+
+{$HEADSCALE_DOMAIN} {
+	reverse_proxy headscale:80
+}
+
 {$ROUTER_DOMAIN} {
+	bind tailscale/caddy
 	encode gzip zstd
 	reverse_proxy 192.168.1.1:80 {
 		header_up X-Real-IP {remote_host}
@@ -32,16 +40,12 @@ reddit.{$TAILNET} {
 }
 
 {$INVIDIOUS_DOMAIN} {
+	bind tailscale/caddy
 	reverse_proxy invidious:80
 }
 
 {$PIHOLE_DOMAIN} {
 	reverse_proxy pihole:80
-}
-
-{$HEADSCALE_DOMAIN} {
-	bind 0.0.0.0
-	reverse_proxy headscale:80
 }
 
 # {$VAULTWARDEN_DOMAIN} {
