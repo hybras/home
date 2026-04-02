@@ -10,12 +10,6 @@
 }
 
 :80 {
-	bind 0.0.0.0
-	respond "Hello, World!"
-}
-
-:443 {
-	bind 0.0.0.0
 	respond "Hello, World!"
 }
 
@@ -25,10 +19,7 @@
 
 {$ROUTER_DOMAIN} {
 	bind tailscale/caddy
-	encode gzip zstd
-	reverse_proxy 192.168.1.1:80 {
-		header_up X-Real-IP {remote_host}
-	}
+	reverse_proxy 192.168.1.1:80
 }
 
 # {$REDDIT_DOMAIN} {
@@ -46,12 +37,11 @@ reddit.{$TAILNET} {
 }
 
 {$PIHOLE_DOMAIN} {
+	bind tailscale/caddy
 	reverse_proxy pihole:80
 }
 
 # {$VAULTWARDEN_DOMAIN} {
-# 	encode gzip
-
 # 	# Notifications redirected to the WebSocket server
 # 	reverse_proxy /notifications/hub vaultwarden:3012
 # 	reverse_proxy vaultwarden:80
