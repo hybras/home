@@ -14,7 +14,7 @@ services:
       - '127.0.0.1:9090:9090'
     volumes:
       - headscale:/var/lib/headscale
-      - ./config.yaml:/etc/headscale/config.yaml:ro
+      - ./headscale.yaml:/etc/headscale/config.yaml:ro
     command: serve
     healthcheck:
       test: ['CMD', 'headscale', 'health']
