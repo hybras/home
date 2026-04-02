@@ -3,10 +3,9 @@ services:
     image: ghcr.io/hybras/caddy:latest
     container_name: caddy
     restart: always
-    # command: ["caddy", "docker-proxy"]
-    # ports:
-    #   - 80:80 # Needed for the ACME HTTP-01 challenge.
-    #   - 443:443
+    ports:
+      - 80:80 # Needed for the ACME HTTP-01 challenge.
+      - 443:443
     volumes:
       - caddy:/data
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
