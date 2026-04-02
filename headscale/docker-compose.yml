@@ -1,11 +1,18 @@
 volumes:
-  headscale: {}
+  headscale: { name: headscale }
+
+networks:
+  headscale:
+    name: headscale
+  caddy:
+    external: true
 
 services:
   headscale:
     dns: []
     image: docker.io/headscale/headscale:0.28.0
     restart: unless-stopped
+    container_name: headscale
     read_only: true
     tmpfs:
       - /var/run/headscale
