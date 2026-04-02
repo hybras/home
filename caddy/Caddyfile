@@ -34,6 +34,10 @@ reddit.{$TAILNET} {
 	reverse_proxy pihole:80
 }
 
+{$HEADSCALE_DOMAIN} {
+	reverse_proxy headscale:80
+}
+
 # {$VAULTWARDEN_DOMAIN} {
 # 	encode gzip
 
