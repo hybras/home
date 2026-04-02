@@ -11,9 +11,6 @@
 # https://myheadscale.example.com:443
 #
 server_url: https://headscale.hybras.dev:443
-tls_cert_path: ""
-tls_key_path: ""
-
 
 # Address to listen to / bind to on the server
 #
