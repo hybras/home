@@ -10,6 +10,10 @@
 	default_bind tailscale/caddy
 }
 
+http://192.168.1.85 {
+	respond "Hello, World!"
+}
+
 {$ROUTER_DOMAIN} {
 	encode gzip zstd
 	reverse_proxy 192.168.1.1:80 {
