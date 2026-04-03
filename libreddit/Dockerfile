@@ -18,7 +18,6 @@ RUN git clone https://github.com/redlib-org/redlib . && \
 
 RUN echo "fn main() { panic!(\"why am i running?\") }" > src/main.rs
 RUN cargo build --release --locked --bin redlib
-RUN rm ./src/main.rs && rmdir ./src
 
 # copy the source and build the redlib binary
 RUN git checkout HEAD -- src/main.rs
