@@ -1,0 +1,35 @@
+# Headplane Configuration
+# https://headplane.net/configuration
+
+server:
+  # Host and port to listen on
+  host: "0.0.0.0"
+  port: 80
+
+  # Base URL for Headplane (should be your headscale domain)
+  # This is used for reverse proxy and API endpoints
+  base_url: "https://headscale.hybras.dev"
+
+  # Cookie secret for session encoding (CHANGE THIS TO A RANDOM 32-CHARACTER STRING!)
+  # Generate with: openssl rand -base64 24 | tr -d '\n'
+  cookie_secret_path: "/var/lib/headplane/cookie_secret"
+
+  # Mark cookies as secure when behind HTTPS reverse proxy
+  cookie_secure: true
+
+# Integration with Docker (for managing Headscale in Docker)
+integration:
+  docker:
+    enabled: true
+    container_label: "me.tale.headplane.target=headscale"
+
+# Headscale integration settings
+headscale:
+  # API endpoint for headscale (must be accessible from headplane container)
+  # Within Docker, use the internal container name
+  url: "http://headscale:80"
+
+  # Path to the headscale config file (must match volume mount in docker-compose)
+  config_path: "/etc/headscale/config.yaml"
+
+  config_strict: false

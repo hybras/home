@@ -1,5 +1,6 @@
 volumes:
   headscale: { name: headscale }
+  headplane: { name: headplane }
 
 networks:
   headscale:
@@ -31,3 +32,21 @@ services:
     networks:
       - headscale
       - caddy
+    labels:
+      me.tale.headplane.target: headscale
+  headplane:
+    image: ghcr.io/tale/headplane:0.6.2
+    container_name: headplane
+    restart: unless-stopped
+    volumes:
+      - headplane:/var/lib/headplane
+      - ./headplane.yaml:/etc/headplane/config.yaml:ro
+      - ./headscale.yaml:/etc/headscale/config.yaml
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./cookie_secret:/var/lib/headplane/cookie_secret:ro
+    networks:
+      - headscale
+      - caddy
+    depends_on:
+      headscale:
+        condition: service_healthy
