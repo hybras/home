@@ -1,0 +1,9 @@
+{
+    "caddyfile.executables": [
+        "caddy/caddy"
+    ],
+    "cSpell.words": [
+        "caddyfile",
+        "headscale"
+    ]
+}
