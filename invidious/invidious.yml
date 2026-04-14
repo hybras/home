@@ -9,7 +9,7 @@ db:
   dbname: invidious
 full_refresh: false
 https_only: true
-domain: youtube.hybras.dev
+domain: youtube.tail05e854.ts.net
 port: 80
 invidious_companion:
 - private_url: "http://invidious-companion/companion"
