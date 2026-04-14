@@ -4,3 +4,5 @@ reload:
     docker compose exec caddy caddy reload --config /etc/caddy/Caddyfile
 sh:
     docker compose exec -it caddy sh
+cat:
+    docker compose exec -it caddy cat /etc/caddy/Caddyfile
