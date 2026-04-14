@@ -14,12 +14,8 @@
 }
 
 {$HEADSCALE_DOMAIN} {
-	handle / {
-		redir /admin
-	}
-	handle /admin* {
-		reverse_proxy headplane:80
-	}
+	redir / /admin
+	reverse_proxy /admin* headplane:80
 	reverse_proxy headscale:80
 }
 
@@ -44,9 +40,7 @@ reddit.{$TAILNET} {
 
 {$PIHOLE_DOMAIN} {
 	bind tailscale/caddy
-	handle / {
-		redir /admin
-	}
+	redir / /admin
 	reverse_proxy pihole:80
 }
 
