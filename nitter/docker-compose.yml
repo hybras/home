@@ -31,6 +31,7 @@ services:
       - nitter-db
     volumes:
       - nitter:/data
+      - ./sessions.jsonl:/src/sessions.jsonl
     configs:
       - source: nitter
         target: /src/nitter.conf
@@ -45,4 +46,4 @@ services:
     mem_limit: 40MiB
     labels:
       caddy: ${DOMAIN}
-      caddy.reverse_proxy: "{{upstreams 80}}"
+      caddy.reverse_proxy: '{{upstreams 80}}'

@@ -33,13 +33,18 @@ reddit.{$TAILNET} {
 	reverse_proxy libreddit:80
 }
 
-{$INVIDIOUS_DOMAIN} {
-	bind tailscale/caddy
+youtube.{$TAILNET} {
+	bind tailscale/youtube
 	reverse_proxy invidious:80
 }
 
-{$PIHOLE_DOMAIN} {
-	bind tailscale/caddy
+twitter.{$TAILNET} {
+	bind tailscale/twitter
+	reverse_proxy nitter:80
+}
+
+pihole.{$TAILNET} {
+	bind tailscale/pihole
 	redir / /admin
 	reverse_proxy pihole:80
 }
