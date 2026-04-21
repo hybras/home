@@ -1,0 +1,61 @@
+---
+networks:
+  authelia:
+    name: 'authelia'
+  caddy:
+    external: true
+
+volumes:
+  authelia-sessions-db:
+  authelia-db:
+
+secrets:
+  JWT_SECRET:
+    file: '${PWD}/data/authelia/secrets/JWT_SECRET'
+  SESSION_SECRET:
+    file: '${PWD}/data/authelia/secrets/SESSION_SECRET'
+  STORAGE_PASSWORD:
+    file: '${PWD}/data/authelia/secrets/STORAGE_PASSWORD'
+  STORAGE_ENCRYPTION_KEY:
+    file: '${PWD}/data/authelia/secrets/STORAGE_ENCRYPTION_KEY'
+
+services:
+  authelia:
+    image: 'authelia/authelia:4.39.16'
+    container_name: 'authelia'
+    volumes:
+      - '${PWD}/data/authelia/config:/config'    
+    networks:
+      - authelia
+      - caddy
+    secrets: ['JWT_SECRET', 'SESSION_SECRET', 'STORAGE_PASSWORD', 'STORAGE_ENCRYPTION_KEY']
+    environment:
+      TZ: 'US/Eastern'
+      AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET_FILE: '/run/secrets/JWT_SECRET'
+      AUTHELIA_SESSION_SECRET_FILE: '/run/secrets/SESSION_SECRET'
+      AUTHELIA_STORAGE_POSTGRES_PASSWORD_FILE: '/run/secrets/STORAGE_PASSWORD'
+      AUTHELIA_STORAGE_ENCRYPTION_KEY_FILE: '/run/secrets/STORAGE_ENCRYPTION_KEY'
+  
+  sessions-db:
+    image: redis:8-alpine
+    restart: unless-stopped
+    volumes:
+      - authelia-sessions-db:/data
+    networks:
+      - authelia
+    mem_limit: 20MiB
+
+  db:
+    image: postgres:18 
+    restart: unless-stopped
+    networks:
+      - authelia
+    volumes:
+      - authelia-db:/var/lib/postgresql
+    secrets:
+      - STORAGE_PASSWORD
+    environment:
+      - POSTGRES_PASSWORD_FILE=/run/secrets/STORAGE_PASSWORD
+      - POSTGRES_USER=authelia
+      - POSTGRES_DB=authelia
+    mem_limit: 200MiB

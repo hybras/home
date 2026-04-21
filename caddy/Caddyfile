@@ -49,6 +49,11 @@ pihole.{$TAILNET} {
 	reverse_proxy pihole:80
 }
 
+auth.{$PUBLIC_SUFFIX} {
+	bind tailscale/caddy
+	reverse_proxy authelia:80
+}
+
 # {$VAULTWARDEN_DOMAIN} {
 # 	# Notifications redirected to the WebSocket server
 # 	reverse_proxy /notifications/hub vaultwarden:3012
