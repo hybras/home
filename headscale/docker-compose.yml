@@ -8,6 +8,10 @@ networks:
   caddy:
     external: true
 
+secrets:
+  headplane-cookie-secret:
+    file: ./cookie_secret
+
 services:
   headscale:
     dns: []
@@ -43,7 +47,8 @@ services:
       - ./headplane.yaml:/etc/headplane/config.yaml:ro
       - ./headscale.yaml:/etc/headscale/config.yaml
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./cookie_secret:/var/lib/headplane/cookie_secret:ro
+    secrets:
+      - headplane-cookie-secret
     networks:
       - headscale
       - caddy
