@@ -1,8 +1,14 @@
 build version:
     docker build -t ghcr.io/hybras/home-setup/caddy:{{version}} --build-arg CADDY_VERSION={{version}} .
 reload:
-    docker compose exec caddy caddy reload --config /etc/caddy/Caddyfile
+    docker compose cp Caddyfile caddy:/etc/caddy/Caddyfile2
+    docker compose exec caddy caddy reload --config /etc/caddy/Caddyfile2
+    docker compose exec caddy rm /etc/caddy/Caddyfile2
 sh:
     docker compose exec -it caddy sh
 cat:
-    docker compose exec -it caddy cat /etc/caddy/Caddyfile
+    docker compose exec -it caddy /bin/cat /etc/caddy/Caddyfile
+validate:
+    ./caddy validate --config Caddyfile --envfile caddy.env --envfile duckdns.env
+fmt:
+    ./caddy fmt --overwrite Caddyfile

@@ -46,16 +46,14 @@ Use docker compose commands to update and inspect running containers. Use the `-
 
 Edit config files (including `docker-compose.yaml`), and use docker compose commands to update running containers like (`exec`, `up -d`, `restart`, `stop`, etc.).
 
-**WARNING**::
-This also applies to the caddy container, **DO NOT** use `caddy reload` to update caddy after making config changes.
+### Updating and Validating the Caddyfile
 
-### Validating the Caddyfile
-
-The `caddy` directory contains a caddy binary with the same build configuration and capabilities as the caddy binary inside the caddy docker image. Use the following commands to ensure its validity and formatting after making changes
+Use the following commands to ensure its validity and formatting after making changes. There is a justfile with commands to wrap docker and caddy
 
 ```bash
-caddy validate --config Caddyfile --envfile caddy.env --envfile duckdns.env
-caddy fmt --overwrite Caddyfile
+just validate
+just fmt
+just reload
 ```
 
 ### Debugging Container Internal Networking
