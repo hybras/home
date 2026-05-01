@@ -54,6 +54,11 @@ auth.{$PUBLIC_SUFFIX} {
 	reverse_proxy authelia:80
 }
 
+ldap.{$TAILNET} {
+	bind tailscale/ldap
+	reverse_proxy lldap:80
+}
+
 # {$VAULTWARDEN_DOMAIN} {
 # 	# Notifications redirected to the WebSocket server
 # 	reverse_proxy /notifications/hub vaultwarden:3012

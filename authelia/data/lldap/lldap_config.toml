@@ -1,0 +1,17 @@
+## lldap configuration
+## Secrets (jwt_secret, ldap_user_pass) are injected via LLDAP_JWT_SECRET_FILE
+## and LLDAP_LDAP_USER_PASS_FILE environment variables.
+
+ldap_host = "0.0.0.0"
+ldap_port = 3890
+http_host = "0.0.0.0"
+http_port = 80
+ldap_base_dn = "dc=hybras,dc=dev"
+ldap_user_dn = "admin"
+ldap_user_email = "id9seeker@gmail.com"
+
+http_url = "https://ldap.tail05e854.ts.net"
+
+database_url = "sqlite:///data/users.db?mode=rwc"
+
+key_seed = "sbJaegjsPiRihA7+RWxzeEsmcRTJC//T"
