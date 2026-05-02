@@ -3,7 +3,7 @@
 ## and LLDAP_LDAP_USER_PASS_FILE environment variables.
 
 ldap_host = "0.0.0.0"
-ldap_port = 3890
+ldap_port = 389
 http_host = "0.0.0.0"
 http_port = 80
 ldap_base_dn = "dc=hybras,dc=dev"
