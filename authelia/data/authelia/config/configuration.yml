@@ -124,8 +124,6 @@ definitions:
 ## Authentication Backend Provider Configuration
 ##
 ## Used for verifying user passwords and retrieve information such as email address and groups users belong to.
-##
-## The available providers are: `file`, `ldap`. You must use only one of these providers. # TODO
 authentication_backend:
   ## Password Change Options.
   # password_change:
@@ -141,7 +139,14 @@ authentication_backend:
     # TODO: enable password reset
     # custom_url: ''
 
-  file:  {}
+  ldap:
+    address: 'ldap://lldap'
+    implementation: 'lldap'
+    base_dn: 'DC=hybras,DC=dev'
+    additional_users_dn: 'OU=people'
+    additional_groups_dn: 'OU=groups'
+    user: 'uid=authelia,OU=people,DC=hybras,DC=dev'
+    # password: # Secret
 
 ##
 ## Password Policy Configuration.
@@ -221,10 +226,10 @@ authentication_backend:
 ##   is optional and matches any resource if not provided.
 ##
 ## Note: the order of the rules is important. The first policy matching (domain, resource, subject) applies.
-# access_control:
+access_control:
   ## Default policy can either be 'bypass', 'one_factor', 'two_factor' or 'deny'. It is the policy applied to any
   ## resource if there is no policy to be applied to the user.
-  # default_policy: 'deny'
+  default_policy: 'one_factor'
 
   # rules:
     ## Rules applied to everyone
