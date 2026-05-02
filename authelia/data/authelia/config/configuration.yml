@@ -318,14 +318,14 @@ session:
 
   ## Cookies configures the list of allowed cookie domains for sessions to be created on.
   ## Undefined values will default to the values below.
-  # cookies: # TODO
-  #   -
+  cookies:
+    -
       ## The name of the session cookie.
-      # name: 'authelia_session'
+      name: 'authelia_session'
 
       ## The domain to protect.
       ## Note: the Authelia portal must also be in that domain.
-      # domain: 'example.com'
+      domain: 'hybras.dev'
 
       ## Required. The fully qualified URI of the portal to redirect users to on proxies that support redirections.
       ## Rules:
@@ -333,7 +333,7 @@ session:
       ##   - The above 'domain' option MUST either:
       ##      - Match the host portion of this URI.
       ##      - Match the suffix of the host portion when prefixed with '.'.
-      # authelia_url: 'https://auth.example.com'
+      authelia_url: 'https://auth.hybras.dev'
 
       ## Optional. The fully qualified URI used as the redirection location if the portal is accessed directly. Not
       ## configuring this option disables the automatic redirection behaviour.
@@ -347,7 +347,7 @@ session:
       ##   - The above 'domain' option MUST either:
       ##      - Match the host portion of this URI.
       ##      - Match the suffix of the host portion when prefixed with '.'.
-      # default_redirection_url: 'https://www.example.com'
+      default_redirection_url: 'https://www.hybras.dev'
 
       ## Sets the Cookie SameSite value. Possible options are none, lax, or strict.
       ## Please read https://www.authelia.com/c/session#same_site
