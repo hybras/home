@@ -1,0 +1,2 @@
+validate:
+    docker compose run --rm authelia authelia validate-config
