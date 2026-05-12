@@ -28,6 +28,8 @@ services:
     volumes:
       - headscale:/var/lib/headscale
       - ./headscale.yaml:/etc/headscale/config.yaml:ro
+    secrets:
+      - headscale-oidc-client-secret
     command: serve
     healthcheck:
       test: ['CMD', 'headscale', 'health']
@@ -51,7 +53,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     secrets:
       - headplane-cookie-secret
-      - headscale-oidc-client-secret
     networks:
       - headscale
       - caddy
