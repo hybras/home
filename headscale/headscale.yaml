@@ -85,8 +85,8 @@ derp:
     region_id: 999
 
     # Region code and name are displayed in the Tailscale UI to identify a DERP region
-    region_code: "headscale"
-    region_name: "Headscale Embedded DERP"
+    region_code: 'headscale'
+    region_name: 'Headscale Embedded DERP'
 
     # Only allow clients associated with this server access
     verify_clients: true
@@ -95,7 +95,7 @@ derp:
     # When the embedded DERP server is enabled stun_listen_addr MUST be defined.
     #
     # For more details on how this works, check this great article: https://tailscale.com/blog/how-tailscale-works/
-    stun_listen_addr: "0.0.0.0:3478"
+    stun_listen_addr: '0.0.0.0:3478'
 
     # Private key used to encrypt the traffic between headscale DERP and
     # Tailscale clients. A missing key will be automatically generated.
@@ -202,10 +202,10 @@ database:
 acme_url: https://acme-v02.api.letsencrypt.org/directory
 
 # Email to register with ACME provider
-acme_email: ""
+acme_email: ''
 
 # Domain name to request a TLS certificate for:
-tls_letsencrypt_hostname: ""
+tls_letsencrypt_hostname: ''
 
 # Path to store certificates and metadata needed by
 # letsencrypt
@@ -219,11 +219,11 @@ tls_letsencrypt_challenge_type: HTTP-01
 # When HTTP-01 challenge is chosen, letsencrypt must set up a
 # verification endpoint, and it will be listening on:
 # :http = port 80
-tls_letsencrypt_listen: ":http"
+tls_letsencrypt_listen: ':http'
 
 ## Use already defined certificates:
-tls_cert_path: ""
-tls_key_path: ""
+tls_cert_path: ''
+tls_key_path: ''
 
 log:
   # Valid log levels: panic, fatal, error, warn, info, debug, trace
@@ -242,7 +242,7 @@ policy:
   mode: file
   # If the mode is set to "file", the path to a
   # HuJSON file containing ACL policies.
-  path: ""
+  path: ''
 
 ## DNS
 #
@@ -322,7 +322,7 @@ dns:
   # Unix socket used for the CLI to connect without authentication
   # Note: for production you will want to set this to something like:
 unix_socket: /var/run/headscale/headscale.sock
-unix_socket_permission: "0770"
+unix_socket_permission: '0770'
 
 # OpenID Connect
 oidc:
