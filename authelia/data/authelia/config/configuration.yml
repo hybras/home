@@ -109,6 +109,7 @@ definitions:
     # definition_name:
       ## The common expression language expression for this definition.
       # expression: ''
+  
 
   ## The network definitions.
   network:
@@ -420,4 +421,37 @@ storage:
 ##
 ## Notifications are sent to users when they require a password reset, a WebAuthn registration or a TOTP registration.
 ## The available providers are: filesystem, smtp. You must use only one of these providers.
-# notifier: null
+notifier:
+  filesystem:
+    filename: '/config/notification.txt'
+
+
+identity_providers:
+  oidc:
+    # hmac_secret: # Secret
+    jwks:
+      # yaml-language-server-disable Incorrect type
+      - key: {{ secret "/run/secrets/JWKS_KEY" | mindent 10 "|" | msquote }}
+    cors:
+      allowed_origins_from_client_redirect_uris: true
+    claims_policies:
+      headscale:
+        id_token: ['email', 'groups']
+    clients:
+      - client_id: 'Hi_qyajZo3MFgc.Edd3esHttKg~Bwg2ZOwlB.Uot4ZvW1EOxKe8Bu-_kTE.IXz2vt92ZibwZ'
+        client_name: 'Headscale'
+        # Replace with a pbkdf2 hash: authelia crypto hash generate pbkdf2 --variant sha512
+        # The plain-text value goes in headscale.yaml oidc.client_secret.
+        client_secret:
+          $pbkdf2-sha512$310000$c6lO.ahFxnJgKPwlyM0cMA$ngCE5hZO9f8bt6fPM6jwl1dZZzjOvBSkzRuioANvZBq5E7vmtWA2Nhsk6rs2YD/nlLlp899fOuTcDZmEP60cpQ
+        redirect_uris:
+          - 'https://headscale.hybras.dev/oidc/callback'
+        scopes:
+          - 'openid'
+          - 'email'
+          - 'profile'
+          - 'groups'
+        claims_policy: 'headscale'
+        authorization_policy: 'two_factor'
+        require_pkce: true
+        pkce_challenge_method: 'S256'

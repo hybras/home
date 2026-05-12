@@ -10,7 +10,9 @@ networks:
 
 secrets:
   headplane-cookie-secret:
-    file: ./cookie_secret
+    file: ./secrets/cookie_secret
+  headscale-oidc-client-secret:
+    file: ./secrets/oidc_client_secret
 
 services:
   headscale:
@@ -49,6 +51,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     secrets:
       - headplane-cookie-secret
+      - headscale-oidc-client-secret
     networks:
       - headscale
       - caddy
