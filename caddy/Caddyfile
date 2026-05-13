@@ -4,7 +4,7 @@
 	}
 	dns cloudflare {env.CLOUDFLARE_TOKEN}
 	tailscale {
-		ephemeral
+		ephemeral false
 		tags tag:caddy
 	}
 }
