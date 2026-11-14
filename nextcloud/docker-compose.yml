@@ -37,7 +37,7 @@ services:
       - ./db.env
     mem_limit: 200MiB
   cron:
-    image: nextcloud:24
+    image: nextcloud:31
     container_name: nextcloud-cron
     restart: always
     volumes:
