@@ -62,7 +62,6 @@ pihole.{$TAILNET} {
 }
 
 auth.{$PUBLIC_SUFFIX} {
-	bind tailscale/caddy
 	reverse_proxy authelia:80
 }
 

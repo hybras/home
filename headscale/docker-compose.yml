@@ -31,6 +31,9 @@ services:
     secrets:
       - headscale-oidc-client-secret
     command: serve
+    # Reach the OIDC issuer via the local Caddy instead of hairpinning through Cloudflare
+    extra_hosts:
+      - 'auth.hybras.dev:host-gateway'
     healthcheck:
       test: ['CMD', 'headscale', 'health']
       interval: 30s
