@@ -12,29 +12,30 @@ volumes:
 
 secrets:
   JWT_SECRET:
-    file: '${PWD}/data/authelia/secrets/JWT_SECRET'
+    file: './data/authelia/secrets/JWT_SECRET'
   SESSION_SECRET:
-    file: '${PWD}/data/authelia/secrets/SESSION_SECRET'
+    file: './data/authelia/secrets/SESSION_SECRET'
   STORAGE_PASSWORD:
-    file: '${PWD}/data/authelia/secrets/STORAGE_PASSWORD'
+    file: './data/authelia/secrets/STORAGE_PASSWORD'
   STORAGE_ENCRYPTION_KEY:
-    file: '${PWD}/data/authelia/secrets/STORAGE_ENCRYPTION_KEY'
+    file: './data/authelia/secrets/STORAGE_ENCRYPTION_KEY'
   JWKS_KEY:
-    file: '${PWD}/data/authelia/secrets/JWK.pem'
+    file: './data/authelia/secrets/JWK.pem'
   HMAC_SECRET:
-    file: '${PWD}/data/authelia/secrets/HMAC_SECRET'
+    file: './data/authelia/secrets/HMAC_SECRET'
   LLDAP_AUTHELIA_PASSWORD:
-    file: '${PWD}/data/authelia/secrets/AUTHENTICATION_BACKEND_LDAP_PASSWORD_FILE'
+    file: './data/authelia/secrets/AUTHENTICATION_BACKEND_LDAP_PASSWORD_FILE'
   LLDAP_JWT_SECRET:
-    file: '${PWD}/data/lldap/secrets/JWT_SECRET'
+    file: './data/lldap/secrets/JWT_SECRET'
   LLDAP_ADMIN_PASSWORD:
-    file: '${PWD}/data/lldap/secrets/ADMIN_PASSWORD'
+    file: './data/lldap/secrets/ADMIN_PASSWORD'
   LLDAP_KEY_SEED:
-    file: '${PWD}/data/lldap/secrets/KEY_SEED'
+    file: './data/lldap/secrets/KEY_SEED'
 
 services:
   authelia:
-    image: 'authelia/authelia:4.39.16'
+    image: 'authelia/authelia:4.39.28'
+    restart: unless-stopped
     logging:
       options:
         max-size: '10m'
@@ -44,7 +45,7 @@ services:
       - sessions-db
     container_name: 'authelia'
     volumes:
-      - '${PWD}/data/authelia/config:/config'
+      - './data/authelia/config:/config'
     networks:
       - authelia
       - caddy
@@ -77,7 +78,7 @@ services:
       - caddy
     volumes:
       - lldap-data:/data
-      - '${PWD}/data/lldap/lldap_config.toml:/data/lldap_config.toml'
+      - './data/lldap/lldap_config.toml:/data/lldap_config.toml'
     secrets: ['LLDAP_JWT_SECRET', 'LLDAP_ADMIN_PASSWORD', 'LLDAP_KEY_SEED']
     environment:
       TZ: 'US/Eastern'

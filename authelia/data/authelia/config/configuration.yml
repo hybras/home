@@ -11,6 +11,11 @@ default_2fa_method: 'totp'
 server:
   address: 'tcp://:80/'
 
+  endpoints:
+    authz:
+      forward-auth:
+        implementation: 'ForwardAuth'
+
   ## Set the path on disk to Authelia assets.
   ## Useful to allow overriding of specific static assets.
   # asset_path: '/config/assets/'
@@ -445,7 +450,7 @@ identity_providers:
         client_secret:
           $pbkdf2-sha512$310000$c6lO.ahFxnJgKPwlyM0cMA$ngCE5hZO9f8bt6fPM6jwl1dZZzjOvBSkzRuioANvZBq5E7vmtWA2Nhsk6rs2YD/nlLlp899fOuTcDZmEP60cpQ
         redirect_uris:
-          - 'https://headscale.hybras.dev/oidc/callback'
+          - 'https://headscale.hybras.dev:443/oidc/callback'
         scopes:
           - 'openid'
           - 'email'
