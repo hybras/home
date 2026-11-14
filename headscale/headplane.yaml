@@ -32,4 +32,3 @@ headscale:
   # Path to the headscale config file (must match volume mount in docker-compose)
   config_path: "/etc/headscale/config.yaml"
 
-  config_strict: false

@@ -17,7 +17,7 @@ secrets:
 services:
   headscale:
     dns: []
-    image: docker.io/headscale/headscale:0.28.0
+    image: docker.io/headscale/headscale:0.29.7
     restart: unless-stopped
     container_name: headscale
     read_only: true
@@ -43,7 +43,7 @@ services:
     labels:
       me.tale.headplane.target: headscale
   headplane:
-    image: ghcr.io/tale/headplane:0.6.2
+    image: ghcr.io/tale/headplane:0.8.2
     container_name: headplane
     restart: unless-stopped
     volumes:
