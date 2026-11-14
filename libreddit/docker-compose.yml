@@ -6,8 +6,7 @@ networks:
 
 services:
   libreddit:
-    image: ghcr.io/hybras/redlib:latest
-    build: .
+    image: quay.io/redlib/redlib:latest
     container_name: libreddit
     restart: unless-stopped
     mem_limit: 40MiB
@@ -19,8 +18,12 @@ services:
     networks:
       - libreddit
       - caddy
+    # colima's host resolver SERVFAILs AAAA queries, which breaks musl's getaddrinfo
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
     healthcheck:
-      test: wget -nv --tries=1 --spider http://127.0.0.1:8080 || exit 1
+      test: wget --spider -q http://127.0.0.1:80/settings || exit 1
       interval: 30s
       timeout: 5s
       retries: 2
