@@ -1,6 +1,6 @@
 services:
   discovery:
-    image: syncthing/discosrv:1
+    image: syncthing/discosrv:v2
     container_name: syncthing-discovery
     command: [ "-http", "-listen=:80" ]
     volumes:
