@@ -1,6 +1,6 @@
 = Home Setup
 
-This repository is a rough spec of what my home server runs. I'm using watchtower for automatic upgrades, which means upgrades which require manual intervention are not allowed.
+This repository is a rough spec of what my home server runs. Image versions are pinned and bumped by Dependabot pull requests, which are deployed manually.
 
 == TODO
 

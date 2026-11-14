@@ -10,7 +10,7 @@ This repository contains a complete home server setup running multiple services 
 - Optional `justfile` for common service-specific tasks
 - `README.md` - Service-specific documentation
 
-**Watchtower Integration**: Automatic container updates are enabled via Watchtower, which means configuration changes requiring manual intervention are not permitted.
+**Dependabot Updates**: Image versions are pinned in each `docker-compose.yml` and bumped weekly by Dependabot PRs (`.github/dependabot.yml`). After merging, pull and redeploy with `docker compose -C <service> up -d`.
 
 ---
 
@@ -69,7 +69,6 @@ This repository contains a complete home server setup running multiple services 
 | **Pihole** | DNS-level ad blocking | VPN | Network-wide filtering |
 | **Vaultwarden** | Bitwarden-compatible password manager | Public | Password vault |
 | **Syncthing** | Decentralized file sync | VPN | Device synchronization |
-| **Watchtower** | Automatic container updates | Background | Auto-deployment system |
 
 ---
 
@@ -131,7 +130,7 @@ admin.internal {
 
 - Work directly on `main` branch or create feature branches
 - Merge only when tested and ready for deployment
-- Watchtower watches for changes and auto-deploys
+- Dependabot opens PRs for image updates; deploy after merging
 
 ### Configuration Management
 
@@ -387,7 +386,7 @@ docker run --rm nicolaka/netshoot:latest \
 
 #### Container Lifecycle
 - Container should auto-restart on crash (restart policy: `unless-stopped`)
-- Watchtower will pull image updates automatically
+- Image updates arrive as Dependabot PRs
 - Changes to nitter.conf require container restart
 - Session data persists between restarts (important for maintaining Twitter sessions)
 

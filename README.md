@@ -7,7 +7,7 @@ A comprehensive personal home server setup featuring multiple privacy-focused se
 This repository contains a complete infrastructure-as-code setup for a home server running containerized services for personal use and sharing with a small group of friends and family. All services are:
 - **Reverse-proxied** through Caddy with automatic HTTPS via Let's Encrypt
 - **Accessible** via public domains or private VPN (Headscale)
-- **Updated automatically** by Watchtower without manual intervention required
+- **Kept up to date** by Dependabot PRs that bump pinned image versions
 - **Authenticated** through centralized Authelia + LDAP
 
 ## 🏗️ Architecture Overview
