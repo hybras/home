@@ -1,0 +1,71 @@
+name: Validate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    steps:
+      - uses: actions/checkout@v4
+
+      # Secret env files are gitignored, so don't resolve env_file entries.
+      - name: Validate compose files
+        run: |
+          status=0
+          for f in */docker-compose.yml; do
+            dir=$(dirname "$f")
+            if docker compose --project-directory "$dir" config -q --no-env-resolution; then
+              echo "ok   $dir"
+            else
+              echo "FAIL $dir"; status=1
+            fi
+          done
+          exit $status
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Parse the Caddyfile with our plugin build; catches syntax and unknown directives.
+      - name: Validate Caddyfile
+        run: |
+          docker run --rm -v "$PWD/caddy:/w:ro" -w /w ghcr.io/hybras/caddy:latest \
+            caddy adapt --config Caddyfile --envfile caddy.env > /dev/null
+
+  automerge:
+    needs: validate
+    if: github.event_name == 'pull_request' && github.event.pull_request.user.login == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - id: meta
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Patch bumps only. Headscale and Authelia are excluded: pre-1.0 / stateful
+      # services whose upgrades can need config or migration work.
+      - name: Merge patch updates
+        if: >-
+          steps.meta.outputs.update-type == 'version-update:semver-patch' &&
+          steps.meta.outputs.directory != '/headscale' &&
+          steps.meta.outputs.directory != '/authelia'
+        run: gh pr merge --squash "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
