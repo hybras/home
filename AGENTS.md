@@ -281,8 +281,8 @@ LLDAP is a lightweight LDAP server that provides centralized user management for
 
 #### Architecture
 - **LLDAP Container**: Runs SQLite database with LDAP protocol server
-- **Port 3890**: LDAP port (internal network only)
-- **Port 17170**: Web admin interface (accessible via VPN or public if exposed)
+- **Port 389**: LDAP port (internal network only)
+- **Port 80**: Web admin interface (VPN-only at `ldap.<tailnet>` via Caddy)
 - **Storage**: `/var/lib/lldap/` - SQLite database with user data
 
 #### Key Concepts
@@ -303,7 +303,7 @@ LLDAP is a lightweight LDAP server that provides centralized user management for
 ```bash
 # Test LDAP connectivity from container
 docker run --rm --network authelia nicolaka/netshoot:latest \
-  ldapsearch -x -H ldap://lldap:3890 \
+  ldapsearch -x -H ldap://lldap:389 \
     -D "uid=admin,ou=people,dc=hybras,dc=dev" \
     -w <password> \
     -b "dc=hybras,dc=dev"
@@ -318,14 +318,14 @@ docker compose -C authelia exec lldap \
 ```
 
 #### LDAP to Authelia Integration
-- Authelia config specifies LDAP backend: `server: ldap://lldap:3890`
+- Authelia config specifies LDAP backend: `address: ldap://lldap` (default port 389)
 - Connection uses service account credentials from secrets
 - User login attempts validated against LLDAP password hashes
 - Group membership determines access control and service permissions
 
 #### Troubleshooting LDAP Issues
 1. **"Invalid credentials" error**: Check password hash in LLDAP database
-2. **Connection refused**: Verify LLDAP container is running on port 3890
+2. **Connection refused**: Verify LLDAP container is running on port 389
 3. **User exists but can't login**: Check base DN and user uid format
 4. **New user can't authenticate**: Ensure password was set correctly in LLDAP
 

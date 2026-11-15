@@ -27,7 +27,7 @@ Authelia provides centralized authentication and authorization for all home serv
 - Lightweight LDAP directory
 - User and group management
 - Stored in SQLite (local database)
-- Administrator interface on port 17170
+- Administrator interface on port 80 (`ldap.<tailnet>` via Caddy)
 
 ### Authentication Flow
 
@@ -165,7 +165,7 @@ docker compose -C authelia logs -f authelia | grep -i auth
 # Test LDAP connection from temporary container
 docker run --rm --network authelia \
   nicolaka/netshoot:latest \
-  ldapsearch -x -H ldap://lldap:3890 \
+  ldapsearch -x -H ldap://lldap:389 \
     -D "uid=admin,ou=people,dc=hybras,dc=dev" \
     -W
 ```
